@@ -2,6 +2,97 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://example.com/2021/01/15/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/00%20ReadMe/</loc>
+    
+    <lastmod>2021-01-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/05%20Sir%20Humphrey%20@%20NO.10/</loc>
+    
+    <lastmod>2021-01-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/O.Henry's%20World%20@%20NO.10/</loc>
+    
+    <lastmod>2021-01-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/O.Henry's%20World%20@%20DAA/</loc>
+    
+    <lastmod>2021-01-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/06%20Bernard%20Woolley%20@%20NO.10/</loc>
+    
+    <lastmod>2021-01-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/04%20Jim%20Hacker%20@%20NO.10/</loc>
+    
+    <lastmod>2021-01-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/03%20Bernard%20Woolley%20@%20DAA/</loc>
+    
+    <lastmod>2021-01-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/02%20Sir%20Humphery%20@%20DAA/</loc>
+    
+    <lastmod>2021-01-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/01%20Jim%20Hacker%20@%20DAA/</loc>
+    
+    <lastmod>2021-01-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2020/12/31/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/%E5%8F%B2%E5%AE%B6%E4%B9%8B%E7%BB%9D%E5%94%B1%20%E5%8F%B8%E9%A9%AC%E8%BF%81%E4%B8%8E%E6%8A%A5%E4%BB%BB%E5%AE%89%E4%B9%A6/</loc>
+    
+    <lastmod>2021-01-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2021/01/01/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8701%E8%8D%86%E8%BD%B2%E5%88%BA%E7%A7%A6/</loc>
+    
+    <lastmod>2021-01-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2021/01/12/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8712%E9%80%9A%E5%A4%A9%E5%A4%A7%E8%AE%A1/</loc>
+    
+    <lastmod>2021-01-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2021/01/19/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8719%E9%82%AF%E9%83%B8%E4%B9%8B%E6%88%98/</loc>
+    
+    <lastmod>2021-01-19</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://example.com/2021/01/21/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8721%E6%B0%B4%E6%B7%B9%E5%A4%A7%E6%A2%81/</loc>
     
     <lastmod>2021-01-19</lastmod>
@@ -16,28 +107,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/04%20the%20Truth%20of%20the%20World/</loc>
-    
-    <lastmod>2021-01-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://example.com/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/01%20Great%20Design%20of%20Jim%20Hacker/</loc>
-    
-    <lastmod>2021-01-19</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://example.com/2021/01/17/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8717%E7%A7%A6%E8%B5%B5%E4%B9%8B%E4%BA%89/</loc>
-    
-    <lastmod>2021-01-18</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://example.com/2021/01/17/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8719%E9%82%AF%E9%83%B8%E4%B9%8B%E6%88%98/</loc>
     
     <lastmod>2021-01-18</lastmod>
     
@@ -51,23 +121,9 @@
   </url>
   
   <url>
-    <loc>http://example.com/2021/01/15/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/00%20ReadMe/</loc>
-    
-    <lastmod>2021-01-16</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://example.com/2021/01/16/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8716%E8%B5%B5%E6%AD%A6%E7%81%B5%E7%8E%8B/</loc>
     
     <lastmod>2021-01-16</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://example.com/2021/01/16/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/02%20Big%20Speeches%20of%20Sir%20Humphery/</loc>
-    
-    <lastmod>2021-01-15</lastmod>
     
   </url>
   
@@ -184,13 +240,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/2021/01/12/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8712%E9%80%9A%E5%A4%A9%E5%A4%A7%E8%AE%A1/</loc>
-    
-    <lastmod>2021-01-14</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://example.com/2021/01/07/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8707%E5%BC%82%E4%BA%BA%E5%A5%87%E7%BC%98/</loc>
     
     <lastmod>2021-01-14</lastmod>
@@ -247,21 +296,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2020/12/31/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/%E5%8F%B2%E5%AE%B6%E4%B9%8B%E7%BB%9D%E5%94%B1%20%E5%8F%B8%E9%A9%AC%E8%BF%81%E4%B8%8E%E6%8A%A5%E4%BB%BB%E5%AE%89%E4%B9%A6/</loc>
-    
-    <lastmod>2021-01-14</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://example.com/2021/01/02/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8702%E8%A5%84%E5%85%AC%E7%AB%8B%E5%9B%BD/</loc>
-    
-    <lastmod>2021-01-14</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://example.com/2021/01/01/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8701%E8%8D%86%E8%BD%B2%E5%88%BA%E7%A7%A6/</loc>
     
     <lastmod>2021-01-14</lastmod>
     
@@ -326,7 +361,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/YesMinister/</loc>
+    <loc>http://example.com/tags/DAA-NO-10/</loc>
     <lastmod>2021-01-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
