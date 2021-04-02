@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
+  
+  
+  
+  
+  <title>chapter 07 Function | 克疾文轩</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chapter 07 Function">
+<meta property="og:url" content="https://github.com/XuSiyuan-cn/2021/03/07/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2007%20Function/index.html">
+<meta property="og:site_name" content="克疾文轩">
+<meta property="og:description" content="函数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.hualigs.cn/image/605e9f1b1cb95.jpg">
+<meta property="og:image" content="https://z3.ax1x.com/2021/03/27/6z6nET.png">
+<meta property="og:image" content="https://z3.ax1x.com/2021/03/27/6z67q0.png">
+<meta property="og:image" content="https://www.hualigs.cn/image/605f014f01a82.jpg">
+<meta property="og:image" content="https://z3.ax1x.com/2021/03/27/cSKYCQ.png">
+<meta property="article:published_time" content="2021-03-07T13:59:47.000Z">
+<meta property="article:modified_time" content="2021-03-29T05:40:04.196Z">
+<meta property="article:author" content="XuSiyuan">
+<meta property="article:tag" content="C语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.hualigs.cn/image/605e9f1b1cb95.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="克疾文轩" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.png" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/"></a></h1>
+        </hgroup>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder="搜索一下" autocomplete="off">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/archives/">所有文章</a></li>
+                        
+                            <li><a  href="/categories/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0">英语学习</a></li>
+                        
+                            <li><a  href="/categories/%E6%95%B0%E5%AD%A6">数学</a></li>
+                        
+                            <li><a  href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B">计算机课程</a></li>
+                        
+                            <li><a  href="/categories/%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/">历史的天空</a></li>
+                        
+                            <li><a  href="/categories/%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF">克疾之路</a></li>
+                        
+                            <li><a  href="/categories/%E7%9B%AE%E5%BD%95">目录</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github"  target="_blank" href="https://github.com/XuSiyuan-cn" title="github">github</a>
+                            
+                                <a class="fl weibo"  target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                            
+                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 18.33px;">C语言</a> <a href="/tags/DAA-NO-10/" style="font-size: 15px;">DAA & NO.10</a> <a href="/tags/%E5%8E%86%E5%8F%B2/" style="font-size: 10px;">历史</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%9D%82/" style="font-size: 11.67px;">杂</a> <a href="/tags/%E6%B1%89%E9%AB%98%E7%A5%96/" style="font-size: 13.33px;">汉高祖</a> <a href="/tags/%E7%A7%A6%E5%A7%8B%E7%9A%87/" style="font-size: 20px;">秦始皇</a> <a href="/tags/%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/" style="font-size: 16.67px;">西楚霸王</a>
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="https://blog.csdn.net/weixin_44338046?spm=1000.2115.3001.5343">csdn</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="https://segmentfault.com/blog/maocg_web">segmentfault</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/eb37ef89c746/latest_articles">简书</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专业是化工，爱好是历史，想要转行计算机</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/avatar.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0">英语学习</a></li>
+                
+                    <li><a href="/categories/%E6%95%B0%E5%AD%A6">数学</a></li>
+                
+                    <li><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B">计算机课程</a></li>
+                
+                    <li><a href="/categories/%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/">历史的天空</a></li>
+                
+                    <li><a href="/categories/%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF">克疾之路</a></li>
+                
+                    <li><a href="/categories/%E7%9B%AE%E5%BD%95">目录</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/XuSiyuan-cn" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-03 计算机课程/01 C/Chapter 07 Function" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/03/07/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2007%20Function/" class="article-date">
+      <time datetime="2021-03-07T13:59:47.000Z" itemprop="datePublished">2021-03-07</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      chapter 07 Function
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/">计算机课程</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>函数</p>
+<a id="more"></a>
+
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a><FONT COLOR = SpringGreen>函数</font></h1><p>　　不要从数学的意义来理解函数，要从 function（功能）的意义来理解函数。</p>
+<h2 id="初见函数"><a href="#初见函数" class="headerlink" title="初见函数"></a><FONT COLOR = Cyan>初见函数</font></h2><h3 id="求素数和"><a href="#求素数和" class="headerlink" title="求素数和"></a><Font Color = DarkCyan size = 4 Face = 仿宋><strong>求素数和</strong></font></h3><p>　　求 m ~ n 之间所有素数的和：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> m , n ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span> , &amp;m , &amp;n ) ;</span><br><span class="line"><span class="keyword">int</span> sum = <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span> ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>( m == <span class="number">1</span> )&#123;</span><br><span class="line">	m = <span class="number">2</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//如果没有这段if，那当m为1的时候，下列程序就会把1当素数 </span></span><br><span class="line"><span class="keyword">int</span> i ;</span><br><span class="line"><span class="keyword">for</span>( i = m ; i &lt;= n ; i++ )&#123;</span><br><span class="line">	<span class="keyword">int</span> isPrime = <span class="number">1</span> ;</span><br><span class="line">	<span class="keyword">int</span> k ;</span><br><span class="line">	<span class="keyword">for</span>( k = <span class="number">2</span> ; k &lt; i - <span class="number">1</span> ; k++ )&#123;</span><br><span class="line">		<span class="keyword">if</span>( i % k == <span class="number">0</span> )&#123;</span><br><span class="line">			isPrime = <span class="number">0</span> ;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>( isPrime == <span class="number">1</span> )&#123;</span><br><span class="line">		sum = sum + i ;</span><br><span class="line">		count++ ;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;count = %d sum = %d&quot;</span>,count , sum ) ;</span><br></pre></td></tr></table></figure>
+<p>　　对于里面判断素数的循环，功能是非常单一的——就是判断循环。对于这种功能单一的代码，可以做成一个函数（function），那样既可以让程序变得简洁，也提高了可读性。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Ret</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> isPrime = <span class="number">1</span> ;</span><br><span class="line">	<span class="keyword">int</span> k ;</span><br><span class="line">	<span class="keyword">for</span>( k = <span class="number">2</span> ; k &lt; i<span class="number">-1</span> ; k++)&#123;</span><br><span class="line">		<span class="keyword">if</span>( i % k == <span class="number">0</span> )&#123;</span><br><span class="line">			isPrime = <span class="number">0</span> ;</span><br><span class="line">			<span class="keyword">break</span> ;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> isPrime ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> m , n ;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span> , &amp;m , &amp;n ) ;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span> ;</span><br><span class="line">	<span class="keyword">int</span> count = <span class="number">0</span> ;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>( m == <span class="number">1</span> )&#123;</span><br><span class="line">	m = <span class="number">2</span> ;</span><br><span class="line">	&#125;<span class="comment">//如果没有这段if，那当m为1的时候，下列程序就会把1当素数 </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="keyword">for</span>( i = m ; i &lt;= n ; i++ )&#123;</span><br><span class="line">		<span class="keyword">if</span>( Ret(i) == <span class="number">1</span> )&#123;</span><br><span class="line">			sum = sum + i ;</span><br><span class="line">			count++ ;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;count = %d sum = %d&quot;</span>,count , sum ) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　### <Font Color = DarkCyan size = 4 Face = 仿宋><strong>多次求和</strong></font></p>
+<p>　　求出1<del>10、20</del>30、35~45 的三个和</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i , sum = <span class="number">0</span> ;	</span><br><span class="line"><span class="keyword">for</span>( i = <span class="number">1</span> , sum = <span class="number">0</span> ; i &lt;= <span class="number">10</span> ; i++ )&#123;</span><br><span class="line">	sum = sum + i ;</span><br><span class="line">&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span> , sum );</span><br><span class="line"><span class="keyword">for</span>( i = <span class="number">20</span> , sum = <span class="number">0</span> ; i &lt;= <span class="number">30</span>; i++ )&#123;</span><br><span class="line">	sum = sum + i ;</span><br><span class="line">&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span> , sum );</span><br><span class="line"><span class="keyword">for</span>( i = <span class="number">35</span> , sum = <span class="number">0</span> ; i &lt;= <span class="number">45</span> ; i++ )&#123;</span><br><span class="line">	sum = sum + i ;</span><br><span class="line">&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span> , sum );</span><br></pre></td></tr></table></figure>
+<p>　　这三段是几乎一模一样的。<br>　　Code Duplication，“代码复制”是程序质量不良的表现：<br>　　1、如果将来要做修改维护的时候，会使得维护的地方变得很多。<br>　　2、使代码特别冗长。</p>
+<p>　　对于这种需要重复使用到的“功能function”，不如做成求和函数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SUM</span><span class="params">(<span class="keyword">int</span> begin , <span class="keyword">int</span> end )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span> ;</span><br><span class="line">	<span class="keyword">for</span>( i = begin ; i &lt;= end ; i++ )&#123;</span><br><span class="line">		sum = sum + i ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d ~ %d 的和是%d\n&quot;</span>,begin,end,sum) ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	SUM(<span class="number">1</span>,<span class="number">10</span>) ;</span><br><span class="line">	SUM(<span class="number">20</span>,<span class="number">30</span>) ;</span><br><span class="line">	SUM(<span class="number">35</span>,<span class="number">45</span>) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="函数的定义与使用"><a href="#函数的定义与使用" class="headerlink" title="函数的定义与使用"></a><FONT COLOR = Cyan>函数的定义与使用</font></h2><p>　　函数是一块代码，接受零个或多个参数，做一件事情，并返回零个或一个值。</p>
+<h3 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a><Font Color = DarkCyan size = 4 Face = 仿宋><strong>定义函数</strong></font></h3><p>　　以下列代码为例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SUM</span><span class="params">(<span class="keyword">int</span> begin , <span class="keyword">int</span> end )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span> ;</span><br><span class="line">	<span class="keyword">for</span>( i = begin ; i &lt;= end ; i++ )&#123;</span><br><span class="line">		sum = sum + i ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d ~ %d 的和是%d\n&quot;</span>,begin,end,sum) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　<FONT COLOR = LimeGreen>　<code>void sum(int begin , int end )</code>称为函数头；<br>　　<code>void</code>是返回类型（空类型，不返回结果）；<br>　　<code>sum</code>是函数名；<br>　　<code>(int begin , int end )</code>是参数表。<br>　　<br>大括号里面的称为函数体，大括号是必须的。</font></p>
+<h3 id="调用函数"><a href="#调用函数" class="headerlink" title="调用函数"></a><Font Color = DarkCyan size = 4 Face = 仿宋><strong>调用函数</strong></font></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	sum(<span class="number">1</span>,<span class="number">10</span>) ;</span><br><span class="line">	sum(<span class="number">20</span>,<span class="number">30</span>) ;</span><br><span class="line">	sum(<span class="number">35</span>,<span class="number">45</span>) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　调用函数时，要首先给出：函数名（参数值）。该函数有多少个参数，就需要传递多少个参数，而且要传递正确的数据类型、给出正确的数量和顺序。这些值会被按照顺序依次用来初始化函数中的参数。<br>　　如果调用的参数少了，或者小括号里没有逗号，就会出现以下错误：</p>
+<blockquote>
+<p>error: too few arguments to function</p>
+</blockquote>
+<p>　　<FONT COLOR = LimeGreen>函数名后的 ( ) 非常重要</font>，这个小括号起到了表示函数调用的重要作用，即使没有参数也需要有小括号。<br>　　比如说：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cheers</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;干杯&quot;</span>) ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	cheers() ; </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　但是如果没有这个小括号，就会报错（有的编译器不会报错，但此时也不会调用函数）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cheers</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;干杯&quot;</span>) ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	cheers ; </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>warning: expression result unused cheer ;</p>
+</blockquote>
+<h2 id="Return"><a href="#Return" class="headerlink" title="Return"></a><FONT COLOR = Cyan>Return</font></h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Ret</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> isPrime = <span class="number">1</span> ;</span><br><span class="line">	<span class="keyword">int</span> k ;</span><br><span class="line">	<span class="keyword">for</span>( k = <span class="number">2</span> ; k &lt; i<span class="number">-1</span> ; k++)&#123;</span><br><span class="line">		<span class="keyword">if</span>( i % k == <span class="number">0</span> )&#123;</span><br><span class="line">			isPrime = <span class="number">0</span> ;</span><br><span class="line">			<span class="keyword">break</span> ;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> isPrime ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　这个函数用来判断素数，最后会返回一个值：isPrime。这个返回的结果，最后会返回给调用它的地方。这个函数 Ret 的类型是 int ，所以有一个返回的int的结果。</p>
+<p>　　return 表示停止函数的执行，并且返回一个函数值。return 有两种写法：<br>　　<code>return ;</code>直接结束<br>　　<code>return 表达式</code>把这个值交给函数调用它的地方</p>
+<p>　　比如上段代码，函数运行之后，return 会使得 isPrime 有一个值。后面程序在调用函数的时候，就会把这个值作为运算结果。<Font Size = 2>（讲起来有点绕，后面再看看其他资料）</font></p>
+<p>　　一个函数里可以出现多个return。但是如果一个函数里去使用多个return的话，那么这个函数就会有多个出口，不符合<FONT COLOR = LimeGreen>单一出口原则</font>。</p>
+<p>　　函数的返回值可以赋值给变量、可以再传递给函数、甚至可以丢掉</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MAX</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> max ;</span><br><span class="line">	<span class="keyword">if</span>( a &gt; b )&#123;</span><br><span class="line">		max = a ;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		max = b ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> max ;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">5</span> , b = <span class="number">6</span>, c ;</span><br><span class="line">	c = MAX( <span class="number">10</span> , <span class="number">12</span> ) ;</span><br><span class="line">	c = MAX( a , b ) ;</span><br><span class="line">	c = MAX( c , <span class="number">23</span> ) ;</span><br><span class="line">	c = MAX( MAX( c , a ) , <span class="number">5</span> ) ;</span><br><span class="line">	MAX(<span class="number">12</span>,<span class="number">34</span>) ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span> , MAX(a,b)) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　上述所有写法都是对的，其中所有 MAX 的值，都是函数最后 return 得到的值。<br>　　其中这个<code>MAX(12,34)</code>做了一次调用，但是没有把值交给任何人，就是把函数运行的结果丢掉了。——有时候调用函数的目的并不是要看函数返回的结果，而是要函数的副作用（比如输出一个什么东西）</p>
+<h2 id="无返回值的函数"><a href="#无返回值的函数" class="headerlink" title="无返回值的函数"></a><FONT COLOR = Cyan>无返回值的函数</font></h2><p>　　如果我们需要一个没有返回值的函数，以以下代码为例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SUM</span><span class="params">(<span class="keyword">int</span> begin , <span class="keyword">int</span> end )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span> ;</span><br><span class="line">	<span class="keyword">for</span>( i = begin ; i &lt;= end ; i++ )&#123;</span><br><span class="line">		sum = sum + i ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d ~ %d 的和是%d\n&quot;</span>,begin,end,sum) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　<FONT COLOR = LimeGreen>void 函数名(参数表)</font></p>
+<p>　　不能使用带值得 return ，如果使用了，会出现以下错误：</p>
+<blockquote>
+<p>[Warning] ‘return’ with a value, in function returning void [enabled by default]</p>
+</blockquote>
+<p>　　可以没有 return ，到函数最后一行，函数自动结束。</p>
+<p>　　调用的时候不能做返回值得赋值。此时 SUM 不会返回值，比如以下程序：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SUM</span><span class="params">(<span class="keyword">int</span> begin , <span class="keyword">int</span> end )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span> ;</span><br><span class="line">	<span class="keyword">for</span>( i = begin ; i &lt;= end ; i++ )&#123;</span><br><span class="line">		sum = sum + i ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d ~ %d 的和是%d\n&quot;</span>,begin,end,sum) ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	SUM(<span class="number">1</span>,<span class="number">10</span>) ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,SUM) ;</span><br><span class="line">	SUM(<span class="number">20</span>,<span class="number">30</span>) ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,SUM) ;</span><br><span class="line">	SUM(<span class="number">35</span>,<span class="number">45</span>) ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,SUM) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　此时的<code>SUM(1,10) </code>就是不需要SUM的值，只需要他的副作用——输出一个和。此时SUM的值如下：</p>
+<p><img src="https://www.hualigs.cn/image/605e9f1b1cb95.jpg"></p>
+<h1 id="函数的参数和变量"><a href="#函数的参数和变量" class="headerlink" title="函数的参数和变量"></a><FONT COLOR = SpringGreen>函数的参数和变量</font></h1><h2 id="函数原型"><a href="#函数原型" class="headerlink" title="函数原型"></a><FONT COLOR = Cyan>函数原型</font></h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SUM</span><span class="params">(<span class="keyword">int</span> begin , <span class="keyword">int</span> end )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span> ;</span><br><span class="line">	<span class="keyword">for</span>( i = begin ; i &lt;= end ; i++ )&#123;</span><br><span class="line">		sum = sum + i ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d ~ %d 的和是%d\n&quot;</span>,begin,end,sum) ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	SUM(<span class="number">1</span>,<span class="number">10</span>) ;</span><br><span class="line">	SUM(<span class="number">20</span>,<span class="number">30</span>) ;</span><br><span class="line">	SUM(<span class="number">35</span>,<span class="number">45</span>) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　C的编译器是自上而下分析代码。所以要把函数的定义像这样写在程序的最开始。<br>　　在看到<code>SUM(1,10) ;</code>的时候，程序需要知道 <code>SUM( )</code> 的样子——<FONT COLOR = LimeGreen>函数的名字、函数需要几个参数，每个参数的类型、返回什么类型</font>。这样编译器才能检查程序对 <code>SUM()</code>的调用是否正确。</p>
+<p>　　如果不这样会发生什么？把要调用的函数放在 <code>main()</code>的下面试一试：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	SUM(<span class="number">1</span>,<span class="number">10</span>) ; <span class="comment">//int SUM(int,int)</span></span><br><span class="line">	SUM(<span class="number">20</span>,<span class="number">30</span>) ;</span><br><span class="line">	SUM(<span class="number">35</span>,<span class="number">45</span>) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SUM</span><span class="params">(<span class="keyword">int</span> begin , <span class="keyword">int</span> end )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span> ;</span><br><span class="line">	<span class="keyword">for</span>( i = begin ; i &lt;= end ; i++ )&#123;</span><br><span class="line">		sum = sum + i ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d ~ %d 的和是%d\n&quot;</span>,begin,end,sum) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>会出现以下错误：</p>
+<blockquote>
+<p>[Warning] conflicting types for ‘SUM’ [enabled by default]<br>[Note] previous implicit declaration of ‘SUM’ was here</p>
+</blockquote>
+<p>　　<FONT COLOR = LimeGreen>特别注意，不同编译器对C语言的要求都不同，有的严格有的宽松，具体报错的信息不一定相同</font><br>　　conflicting types 意思是类型冲突。</p>
+<p>　　对于C99以前的标准，程序读到<code>SUM(1,10) ;</code>时，发现此时没有定义 <code>SUM()</code>这个函数，程序会去猜 <code>SUM()</code>的情况，会去假设<code>SUM()</code>里的类型是两个int，并且会返回一个 int 值：<code>int SUM(int,int)</code>。这种做法叫做隐式声明，C99以后就不用了。</p>
+<blockquote>
+<p>warning: implicit declaration of function ‘SUM’ is invalid in C99</p>
+</blockquote>
+<p>　　那么当程序读到<code>SUM(1,10) ;</code>时候，程序会猜这个函数是<code>int SUM(int,int)</code>，但后面对函数定义的时候，又定义其为<code>void SUM(int, int)</code>，所以后面程序会 warning： conflicting types </p>
+<p>　　在实际的工程项目中，很多时候都希望第一眼能看到<code>main()</code>的样子，而不是一大堆函数的定义。所以就有了<FONT COLOR = LimeGreen>原型声明——把函数头+分号放到程序最开头。</font></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SUM</span><span class="params">(<span class="keyword">int</span> begin , <span class="keyword">int</span> end )</span> </span>; <span class="comment">//原型声明</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	SUM(<span class="number">1</span>,<span class="number">10</span>) ;</span><br><span class="line">	SUM(<span class="number">20</span>,<span class="number">30</span>) ;</span><br><span class="line">	SUM(<span class="number">35</span>,<span class="number">45</span>) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SUM</span><span class="params">(<span class="keyword">int</span> begin , <span class="keyword">int</span> end )</span></span>&#123; <span class="comment">//函数定义</span></span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span> ;</span><br><span class="line">	<span class="keyword">for</span>( i = begin ; i &lt;= end ; i++ )&#123;</span><br><span class="line">		sum = sum + i ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d ~ %d 的和是%d\n&quot;</span>,begin,end,sum) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　程序看到原型声明后，会先记住函数的样子，然后遇到<code>main</code>里面的函数调用的时候，会先采取原型声明里面的定义，最后读到下面函数定义的时候，再一次检查函数调用是否正确。</p>
+<p>　　如果原型和定义冲突怎么办？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">SUM</span><span class="params">(<span class="keyword">int</span> begin , <span class="keyword">int</span> end )</span> </span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	SUM(<span class="number">1</span>,<span class="number">10</span>) ;</span><br><span class="line">	SUM(<span class="number">20</span>,<span class="number">30</span>) ;</span><br><span class="line">	SUM(<span class="number">35</span>,<span class="number">45</span>) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SUM</span><span class="params">(<span class="keyword">int</span> begin , <span class="keyword">int</span> end )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span> ;</span><br><span class="line">	<span class="keyword">for</span>( i = begin ; i &lt;= end ; i++ )&#123;</span><br><span class="line">		sum = sum + i ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d ~ %d 的和是%d\n&quot;</span>,begin,end,sum) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　和上面隐式声明一样，出现类型冲突的错误：</p>
+<blockquote>
+<p>[Error] conflicting types for ‘SUM’<br>[Note] previous declaration of ‘SUM’ was here</p>
+</blockquote>
+<p>　　<FONT COLOR = LimeGreen>函数原型</font><br>　　<code>函数头；</code>函数头以分号结尾就构成了函数原型<br>　　函数原型的目的是告诉编译器这个函数长什么样：<br>　　名称；<br>　　参数数量以及参数类型<br>　　返回类型</p>
+<p>　　函数原型的主要目的是告诉编译器函数长什么样，所以对待具体参数的变量名不做检查和要求：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SUM</span><span class="params">(<span class="keyword">int</span>, <span class="keyword">int</span>)</span> </span>; <span class="comment">//原型声明</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	SUM(<span class="number">1</span>,<span class="number">10</span>) ;</span><br><span class="line">	SUM(<span class="number">20</span>,<span class="number">30</span>) ;</span><br><span class="line">	SUM(<span class="number">35</span>,<span class="number">45</span>) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SUM</span><span class="params">(<span class="keyword">int</span> begin , <span class="keyword">int</span> end )</span></span>&#123; <span class="comment">//函数定义</span></span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span> ;</span><br><span class="line">	<span class="keyword">for</span>( i = begin ; i &lt;= end ; i++ )&#123;</span><br><span class="line">		sum = sum + i ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d ~ %d 的和是%d\n&quot;</span>,begin,end,sum) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　此时原型声明可以写成：<br>　　<code>void SUM(int, int) ; </code><br>　　<code>void SUM(int a , int b ) ;</code><br>　　都可以，没有关系，因为编译器在原型声明检查的时候不会检查参数名称，只会检查函数名称、返回类型、参数数量和类型。但为了阅读起来方便，最好是直接把函数头复制过来加分号会好一点，因为要方便人去阅读和修改。</p>
+<h2 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a><FONT COLOR = Cyan>参数传递</font></h2><p>　　如果函数有参数，调用函数时必须传递给它数量、类型正确的值。可以传递给函数的值是表达式的结果，包括：字面量、变量、函数的返回值、计算结果。如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MAX</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> max ;</span><br><span class="line">	<span class="keyword">if</span>( a &gt; b )&#123;</span><br><span class="line">		max = a ;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		max = b ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> max ;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">5</span> , b = <span class="number">6</span>, c ;</span><br><span class="line">	c = MAX( <span class="number">10</span> , <span class="number">12</span> ) ;<span class="comment">//字面量</span></span><br><span class="line">	c = MAX( a , b ) ;<span class="comment">//变量</span></span><br><span class="line">	c = MAX( c+<span class="number">3</span> , <span class="number">23</span> ) ;<span class="comment">//计算的结果</span></span><br><span class="line">	c = MAX( MAX( c , a ) , <span class="number">5</span> ) ;<span class="comment">//函数返回值</span></span><br><span class="line">	MAX(<span class="number">12</span>,<span class="number">34</span>) ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span> , MAX(a,b)) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　这是因为C语言对于表达式的定义非常宽，单一的字面量、单一的变量、进行计算的结果、赋值全部都是表达式。函数调用本身、函数调用结果，全部都是表达式。</p>
+<h3 id="类型不匹配"><a href="#类型不匹配" class="headerlink" title="类型不匹配"></a><Font Color = DarkCyan size = 4 Face = 仿宋><strong>类型不匹配</strong></font></h3><p>　　如果参数传递类型不匹配会怎么样？<br>　　<FONT COLOR = LimeGreen>调用函数时给的值与参数的类型不匹配是C语言传统上最大的漏洞。<br>　　编译器总是悄悄替你把类型转换好，但是这可能不是你所期望的。<br>　　后续的语言，C++/Java 在这方面要求非常严格。</font></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cheer</span><span class="params">( <span class="keyword">int</span> i )</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;cheers %d\n&quot;</span>, i) ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span></span>&#123;</span><br><span class="line">	cheer(<span class="number">1</span>) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　这个程序就是非常简单的函数定义以及函数调用，如果调用时参数传递类型不匹配怎么办？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cheer</span><span class="params">( <span class="keyword">int</span> i )</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;cheers %d\n&quot;</span>, i) ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span></span>&#123;</span><br><span class="line">	cheer(<span class="number">1.1</span>) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　此时程序实际上是出错了，因为<code>cheer()</code>函数要求参数是整型，而调用时的参数是浮点数。此时编译会有两种情况：<br>　　情况1：编译器给出warning，编译器在执行过程中，故意把double型的1.1转化为了整型的1。</p>
+<blockquote>
+<p>warning: implicit conversion from ‘double’ to ‘int’ change value form 1.1 to 1</p>
+<p>此处出现了一个隐含的转化，从 double 转化为 int。</p>
+</blockquote>
+<p>　　情况2：编译器连 warning 都没有，直接通过了编译。</p>
+<p>　　对于绝大多数编译器，以下写法不会出现 warning。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cheer</span><span class="params">( <span class="keyword">int</span> i )</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;cheers %d\n&quot;</span>, i) ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span></span>&#123;</span><br><span class="line">	<span class="keyword">double</span> f = <span class="number">1.1</span> ;</span><br><span class="line">	cheer(f) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　C语言做不到类型匹配的自动检查！！！</p>
+<h3 id="传值"><a href="#传值" class="headerlink" title="传值"></a><Font Color = DarkCyan size = 4 Face = 仿宋><strong>传值</strong></font></h3><p>　　能不能写一个交换 a b 值的函数？试试看：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> x , <span class="keyword">int</span> y )</span> </span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">5</span> , b = <span class="number">6</span> ;</span><br><span class="line">	exchange( a , b ) ;</span><br><span class="line"><span class="comment">//	printf(&quot;%d&quot;,exchange(a,b)) ;</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;a=%d b=%d\n&quot;</span>,a,b) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> x , <span class="keyword">int</span> y )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t = x ;</span><br><span class="line">	x = y ;</span><br><span class="line">	y = t ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　这样的代码可以交换 a 和 b 的值吗？答案是不能的。可以用调试查看一下各个变量的值：</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/6z6nET"><img src="https://z3.ax1x.com/2021/03/27/6z6nET.png" alt="6z6nET.png"></a></p>
+<p>　　这里可以看出来，当程序运行到 <code>exchange()</code>函数里面的时候，变量 a ，b 的状态都是</p>
+<blockquote>
+<p>Not found in current context。</p>
+<p>在当前上下文找不到</p>
+</blockquote>
+<p>　　也就是说，当程序运行到  <code>exchange()</code>函数里面的时候，变量 a b 都是不存在的。同理，当程序运行到<code>main()</code>函数里面的时候，x y t 也都是不存在的：</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/6z67q0"><img src="https://z3.ax1x.com/2021/03/27/6z67q0.png" alt="6z67q0.png"></a></p>
+<p>　　尝试一下查看<code>exchange( a , b ) ;</code>的值，看清楚这一步到底是干什么的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">5</span> , b = <span class="number">6</span> ;</span><br><span class="line">	exchange( a , b ) ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;exchange(a,b)=%d\n&quot;</span>,exchange(a,b)) ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;a=%d b=%d\n&quot;</span>,a,b) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t = a ;</span><br><span class="line">	a = b ;</span><br><span class="line">	b = t ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://www.hualigs.cn/image/605f014f01a82.jpg"></p>
+<p>　　可以看出来，<code>exchange( a , b ) ;</code>实际上是进入exchange函数，然后返回 exchange 的值，对于第一段代码<code>void exchange( int a , int b ) ; </code>此时 exchange 不返回值，对于第二段代码<code>int exchange( int a , int b ) ; </code>返回的就是 return 的值。<br>　　除此之外，<code>exchange( a , b ) ;</code>并不能实际上改变 a 和 b 的值。<br>　　所以这样的函数不能交换 a 和 b 的值。</p>
+<p>　　每个函数都有自己的变量空间，参数也位于这个独立的空间中，和其他函数没有关系。<br><FONT COLOR = LimeGreen>　　函数和<code>main</code>的关系是参数和值得关系，C语言在调用函数的时候，永远只能传值给函数。</font></p>
+<h2 id="本地变量"><a href="#本地变量" class="headerlink" title="本地变量"></a><FONT COLOR = Cyan>本地变量</font></h2><p>　　Local variables 也翻译成局部变量。<br>　　函数的每一次运行就会产生一个独立的变量空间，在这个空间中的变量是函数的这次运行所独有的，称作本地变量。<br>　　所有定义在函数内部的变量就是本地变量。<br>　　参数也是本地变量。</p>
+<h3 id="生存期和作用域"><a href="#生存期和作用域" class="headerlink" title="生存期和作用域"></a><Font Color = DarkCyan size = 4 Face = 仿宋><strong>生存期和作用域</strong></font></h3><p>　　生存期：什么时候变量开始出现，到什么时候变量消亡。<br>　　作用域：在代码的什么范围内可以访问这个变量（这个变量可以起作用的领域）<br>　　对于本地变量，这两个答案是统一的：<FONT COLOR = LimeGreen>大括号——块</font></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> x , <span class="keyword">int</span> y )</span> </span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">5</span> , b = <span class="number">6</span> ;</span><br><span class="line">	exchange( a , b ) ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;a=%d b=%d\n&quot;</span>,a,b) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> x , <span class="keyword">int</span> y )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t = x ;</span><br><span class="line">	x = y ;</span><br><span class="line">	y = t ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　当程序运行在<code>main()</code>里面时，t x y 是不存在的：<code>Not found in current context</code>。当程序运行在<code>exchange()</code>里面时，a b也是不存在的，<code>Not found in current context</code>。</p>
+<h3 id="本地变量规则"><a href="#本地变量规则" class="headerlink" title="本地变量规则"></a><Font Color = DarkCyan size = 4 Face = 仿宋><strong>本地变量规则</strong></font></h3><p>　　<FONT COLOR = LimeGreen>本地变量是定义在块（一组大括号）内的</font><br>　　这个块可以使函数的块，也可以是语句的块，甚至可以随便拉一对大括号来定义变量。比如下面的 if 语句块里面对 i 定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> x , <span class="keyword">int</span> y )</span> </span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">5</span> , b = <span class="number">6</span> ;</span><br><span class="line">	exchange( a , b ) ;</span><br><span class="line">	<span class="keyword">if</span>( a &lt; b )&#123;</span><br><span class="line">		<span class="keyword">int</span> i = <span class="number">10</span> ;<span class="comment">//这个i生存期和作用域就在这个块里面，离开这个块，i就不存在了。</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;a=%d b=%d\n&quot;</span>,a,b) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> x , <span class="keyword">int</span> y )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t = x ;</span><br><span class="line">	x = y ;</span><br><span class="line">	y = t ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　这个 i 的生存期和作用域都在 if 控制的这个块里面，所以每次进入<code>main()</code>，这个 i 都不一定存在（因为 if 不一定执行）。如果此时想要在 if 块外面使用 i ，如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> x , <span class="keyword">int</span> y )</span> </span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">5</span> , b = <span class="number">6</span> ;</span><br><span class="line">	exchange( a , b ) ;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>( a &lt; b )&#123;</span><br><span class="line">		<span class="keyword">int</span> i = <span class="number">10</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	i++ ;<span class="comment">//在i的生存期和作用域之外使用它</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;a=%d b=%d\n&quot;</span>,a,b) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> x , <span class="keyword">int</span> y )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t = x ;</span><br><span class="line">	x = y ;</span><br><span class="line">	y = t ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　报错：</p>
+<blockquote>
+<p>[Error] ‘i’ undeclared (first use in this function)<br>[Note] each undeclared identifier is reported only once for each function it appears in</p>
+</blockquote>
+<p>　　<FONT COLOR = LimeGreen>程序运行进入这个块之前，其中的变量不存在，离开这个块，其中变量就消失了</font></p>
+<p>　　对上面程序进行调试就可以知道，进入 if 的时候 i 是存在的，出大括号后 i 就是<code>Notfound in current context</code>。</p>
+<p>　　<FONT COLOR = LimeGreen>在块外面定义的变量在块里面任然有效。</font>里面定义的变量出来就不存在了。</p>
+<p>　　同样对上面程序进行调试，在 if 所控制的块里面， a 和 b 都是可以读到的。</p>
+<p>　　<FONT COLOR = LimeGreen>若块里面定义了和外面同名的变量，则里面的变量会掩盖外面的变量。</font></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> x , <span class="keyword">int</span> y )</span> </span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">5</span> , b = <span class="number">6</span> ;</span><br><span class="line">	exchange( a , b ) ;</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> a = <span class="number">0</span> ;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;a = %d\n&quot;</span>,a) ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;a=%d b=%d\n&quot;</span>,a,b) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> x , <span class="keyword">int</span> y )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t = x ;</span><br><span class="line">	x = y ;</span><br><span class="line">	y = t ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　其中输出的值为：</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/cSKYCQ"><img src="https://z3.ax1x.com/2021/03/27/cSKYCQ.png" alt="cSKYCQ.png"></a></p>
+<p>　　可以看出来在 if 控制的块里面，a 的值覆盖了外面 a 的值。但是出来之后，里面的 a 不存在了，a 又回到了初始的状态。</p>
+<p>　　不是所有的编程语言都是这么干的！！！</p>
+<p>　　<FONT COLOR = LimeGreen>不能再一个块里面定义同名的变量</font></p>
+<blockquote>
+<p>[Error] redefinition of ‘a’<br>[Note] previous definition of ‘a’ was here</p>
+</blockquote>
+<p>　　<FONT COLOR = LimeGreen>本地变量不会被默认初始化</font></p>
+<p>　　<FONT COLOR = LimeGreen>参数在进入函数的时候会被初始化</font></p>
+<h2 id="函数庶事"><a href="#函数庶事" class="headerlink" title="函数庶事"></a><FONT COLOR = Cyan>函数庶事</font></h2><h3 id="没有参数时"><a href="#没有参数时" class="headerlink" title="没有参数时"></a><Font Color = DarkCyan size = 4 Face = 仿宋><strong>没有参数时</strong></font></h3><p>　　<code>void f(void)</code>还是<code>void f()</code><br>　　<code>void f(void)</code>明确告诉编译器，f 函数不接受任何参数。在传统的C中，<code>void f()</code>表示 f 函数的参数未知，并不表示没有参数；现在编译器如何处理呢？尝试一下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">()</span> </span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">5</span> , b = <span class="number">6</span> ;</span><br><span class="line">	exchange( a , b ) ;<span class="comment">//到这一行的时候，编译器猜测exchange需要两个int型参数</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;a=%d b=%d\n&quot;</span>,a,b) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> x , <span class="keyword">int</span> y )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t = x ;</span><br><span class="line">	x = y ;</span><br><span class="line">	y = t ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　此时编译通过。编译器理解为，遇到函数原型时，知道有一个函数 <code>void exchange</code>，但不太确定他的参数个数和参数类型。于是编译器根据下面，猜想为双变量，int 型。<br>　　如果此时编译器猜错了呢？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">()</span> </span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">5</span> , b = <span class="number">6</span> ;</span><br><span class="line">	exchange( a , b ) ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;in main , a=%d b=%d\n&quot;</span>,a,b) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">double</span> x , <span class="keyword">double</span> y )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t = x ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;in exchange,a=%f,b=%f\n&quot;</span>,x,y) ;</span><br><span class="line">	x = y ;</span><br><span class="line">	y = t ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　这段程序通过编译了！<br>　　此时程序输出：<br>　　in exchange ， a = 0.000000，b = 0.000000<br>　　in main ，a = 5 b = 6。<br>　　可以看出来，虽然编译器在语法上没有发现这段程序出错，但实际上程序第一次运行到<code>exchange( a , b ) ;</code>时，是认为 exchange 是 int 型。等到运行完下面的函数部分，第二次运行到<code>exchange( a , b )</code>时，把两个整型的量交给<code>exchange</code>，此时就出错了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">(<span class="keyword">double</span> x , <span class="keyword">double</span> y )</span> </span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">5</span> , b = <span class="number">6</span> ;</span><br><span class="line">	exchange( a , b ) ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;in main , a=%d b=%d\n&quot;</span>,a,b) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">double</span> x , <span class="keyword">double</span> y )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t = x ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;in exchange,a=%f,b=%f\n&quot;</span>,x,y) ;</span><br><span class="line">	x = y ;</span><br><span class="line">	y = t ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　但是这种写法就是正确的，此时虽然也是把两个整型交给 exchange 。但是一开始原型声明就正确了，使得后面整型变量会自动转化为 double 型。</p>
+<p>　　<FONT COLOR = LimeGreen>所以，不要这么些函数原型<code>void f()</code></font></p>
+<h3 id="逗号运算符"><a href="#逗号运算符" class="headerlink" title="逗号运算符"></a><Font Color = DarkCyan size = 4 Face = 仿宋><strong>逗号运算符</strong></font></h3><p>　　在C语言里，逗号也是一种运算符，比如<code>(a,b)</code>，此时右边的 b 就是其运算的结果。那么调用函数时的逗号和逗号运算符如何区分？<br>　　<code>F(a,b)</code>调用函数时，小括号的逗号是标点符号，不是运算符。<br>　　<code>F((a,b))</code>此时逗号是运算符，此时函数的参数只有1个，</p>
+<h3 id="不可嵌套定义函数"><a href="#不可嵌套定义函数" class="headerlink" title="不可嵌套定义函数"></a><Font Color = DarkCyan size = 4 Face = 仿宋><strong>不可嵌套定义函数</strong></font></h3><p>　　C语言里不允许函数的嵌套定义，也就是说函数内部不能再定义函数。可以放函数的声明，但不能放函数体（body）</p>
+<h3 id="糟糕的写法"><a href="#糟糕的写法" class="headerlink" title="糟糕的写法"></a><Font Color = DarkCyan size = 4 Face = 仿宋><strong>糟糕的写法</strong></font></h3><p>　　<code>int i , j , sum( int a , int b )</code>这种写法等同于<code>int i , j ; int sum( int a , int b )</code>不推荐这种写法，不利于阅读。<br>　　<code>return（i）</code>这个 (i) 可有可无，但这会让人误解 return 是一个函数。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/2021/03/07/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2007%20Function/">chapter 07 Function</a></p>	
+		<p><span>文章作者:</span>徐思远</a></p>
+
+        <p><span>发布时间:</span>2021年03月07日 - 21时59分</p>
+        <p><span>最后更新:</span>2021年03月29日 - 13时40分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2021/03/07/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2007%20Function/" title="chapter 07 Function">https://github.com/XuSiyuan-cn/2021/03/07/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2007%20Function/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://github.com/XuSiyuan-cn/2021/03/07/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2007%20Function/　　作者: " title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a  href="/2021/03/08/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2008%20Array/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Chapter 08 Array
+        
+      </div>
+    </a>
+  
+  
+    <a  href="/2021/03/06/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2006%20Data%20Type/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Chapter 06 Data Type</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+//		<p><span>文章作者:</span><a  href="/" title="访问  的个人博客"></a></p>
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E8%A7%81%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">初见函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E7%B4%A0%E6%95%B0%E5%92%8C"><span class="toc-number">1.1.1.</span> <span class="toc-text">求素数和</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">函数的定义与使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.1.</span> <span class="toc-text">定义函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.2.</span> <span class="toc-text">调用函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Return"><span class="toc-number">1.3.</span> <span class="toc-text">Return</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.</span> <span class="toc-text">无返回值的函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0%E5%92%8C%E5%8F%98%E9%87%8F"><span class="toc-number">2.</span> <span class="toc-text">函数的参数和变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">函数原型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-number">2.2.</span> <span class="toc-text">参数传递</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E4%B8%8D%E5%8C%B9%E9%85%8D"><span class="toc-number">2.2.1.</span> <span class="toc-text">类型不匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E5%80%BC"><span class="toc-number">2.2.2.</span> <span class="toc-text">传值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E5%8F%98%E9%87%8F"><span class="toc-number">2.3.</span> <span class="toc-text">本地变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%AD%98%E6%9C%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">2.3.1.</span> <span class="toc-text">生存期和作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E5%8F%98%E9%87%8F%E8%A7%84%E5%88%99"><span class="toc-number">2.3.2.</span> <span class="toc-text">本地变量规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BA%B6%E4%BA%8B"><span class="toc-number">2.4.</span> <span class="toc-text">函数庶事</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B2%A1%E6%9C%89%E5%8F%82%E6%95%B0%E6%97%B6"><span class="toc-number">2.4.1.</span> <span class="toc-text">没有参数时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.4.2.</span> <span class="toc-text">逗号运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%8F%AF%E5%B5%8C%E5%A5%97%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-number">2.4.3.</span> <span class="toc-text">不可嵌套定义函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%9F%E7%B3%95%E7%9A%84%E5%86%99%E6%B3%95"><span class="toc-number">2.4.4.</span> <span class="toc-text">糟糕的写法</span></a></li></ol></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section class="changyan" id="comments">
+  <!--<div id="uyan_frame"></div>-->
+  <div id="SOHUCS"></div>
+  <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
+  <script type="text/javascript">
+    window.changyan.api.config({
+      appid: 'xxxx',
+      conf: 'xxxxxxxxx'
+    });
+  </script>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/2021/03/08/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2008%20Array/" title="上一篇: Chapter 08 Array">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/2021/03/06/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2006%20Data%20Type/" title="下一篇: Chapter 06 Data Type">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/03/24/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/10%20%E4%B8%89%E6%9C%88%E7%9A%84%E7%BB%93%E6%9D%9F/">3月的结束</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/16/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2016%20Interactive%20Graphic%20Design/">Chapter 16 Interactive Graphic Design</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/15/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2015%20ACLLib/">Chapter 15 ACLLib</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/14/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2014%20Linked%20List/">Chapter 14 Linked List</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/13/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2013%20File/">Chapter 13 File</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/12/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2012%20Program%20Structure/">Chapter 12 Program Structure</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/11/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2011%20Structure%20Type/">Chapter 11 Structure Type</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/10/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2010%20Strings/">Chapter 10 Strings</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/09/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2009%20Pointers/">Chapter 09 Pointers</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/08/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2008%20Array/">Chapter 08 Array</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/07/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2007%20Function/">chapter 07 Function</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/06/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2006%20Data%20Type/">Chapter 06 Data Type</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/05/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2005%20Loop%20II/">Chapter 05 Loop I</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/04/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2004%20Loop%20I/">Chapter 04 Loop I</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/03/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/03%E6%B1%89%E9%AB%98%E7%A5%96/%E6%B1%89%E9%AB%98%E7%A5%9603%E8%A5%BF%E5%85%A5%E7%A7%A6%E5%85%B3/">汉高祖03西入秦关</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/03/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2003%20Judgment/">Chapter 03 Judgment</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/02/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2002%20Calculation/">Chapter 02 Calculation</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/01/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2001%20Introduction/">Chapter 01 Introduction</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/27/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/03%E6%B1%89%E9%AB%98%E7%A5%96/%E6%B1%89%E9%AB%98%E7%A5%9602%E6%97%B6%E4%BB%A3%E7%8E%89%E6%88%90/">汉高祖02时代玉成</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/26/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/03%E6%B1%89%E9%AB%98%E7%A5%96/%E6%B1%89%E9%AB%98%E7%A5%9601%E4%BC%A0%E5%A5%87%E7%9A%87%E5%B8%9D/">汉高祖01传奇皇帝</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/25/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD09%E5%9B%9B%E9%9D%A2%E6%A5%9A%E6%AD%8C/">项羽09四面楚歌</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/24/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD08%E9%9C%B8%E7%8E%8B%E5%88%AB%E5%A7%AC/">项羽08霸王别姬</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/23/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD07%E6%80%A7%E6%A0%BC%E4%BD%BF%E7%84%B6/">项羽07性格使然</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/%E6%9D%82/%E5%8F%A4%E4%BB%A3%E6%88%98%E4%BA%89%E4%B8%8B%E7%99%BE%E5%A7%93%E7%9A%84%E7%94%9F%E6%B4%BB/">古代战争下百姓的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD06%E8%8D%A5%E9%98%B3%E4%BC%9A%E6%88%98/">项羽06荥阳会战</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/21/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD05%E7%94%9F%E6%AD%BB%E5%86%B3%E6%88%98/">项羽05生死决战</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/20/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD04%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/">项羽04西楚霸王</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/19/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD03%E9%B8%BF%E9%97%A8%E5%AE%B4%E4%BC%9A/">项羽03鸿门宴会</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/18/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD02%E9%A1%B9%E7%BE%BD%E5%85%A5%E5%85%B33%EF%BC%88%E4%B8%8B%EF%BC%89/">项羽02项羽入关（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/17/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD02%E9%A1%B9%E7%BE%BD%E5%85%A5%E5%85%B32%EF%BC%88%E4%B8%AD%EF%BC%89/">项羽02项羽入关（中）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/17/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD02%E9%A1%B9%E7%BE%BD%E5%85%A5%E5%85%B31%EF%BC%88%E4%B8%8A%EF%BC%89/">项羽02项羽入关（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/16/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD01%E9%9C%B8%E7%8E%8B%E5%87%BA%E4%B8%96/">项羽01霸王出世</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/15/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8747%E9%9A%BE%E8%AF%B4%E5%86%8D%E8%A7%81/">秦始皇47难说再见</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/14/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8746%E5%8D%83%E5%8F%A4%E4%B8%80%E5%B8%9D/">秦始皇46千古一帝</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/13/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8745%E5%94%90%E4%BA%BA%E8%AE%BA%E7%A7%A6/">秦始皇45唐人论秦</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/12/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8744%E6%B1%89%E5%84%92%E8%AF%84%E7%A7%A6/">秦始皇44汉儒评秦</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/11/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8743%E7%9B%97%E9%99%B5%E6%AF%81%E9%99%B5/">秦始皇43盗陵毁陵</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/11/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8742%E7%9A%87%E9%99%B5%E4%B9%8B%E8%B0%9C/">秦始皇42皇陵之谜</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/10/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8741%E5%AD%90%E5%A9%B4%E4%BA%A1%E5%9B%BD/">秦始皇41子婴亡国</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/09/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8740%E8%B5%B5%E9%AB%98%E4%B9%8B%E6%AD%BB/">秦始皇40赵高之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/08/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8739%E8%83%A1%E4%BA%A5%E4%B9%8B%E6%AD%BB/">秦始皇39胡亥之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/07/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8738%E6%9D%8E%E6%96%AF%E4%B9%8B%E6%AD%BB/">秦始皇38李斯之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/06/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8737%E5%B7%A9%E5%9B%BA%E5%B8%9D%E4%BD%8D/">秦始皇37巩固帝位</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/05/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8736%E4%BA%8C%E4%B8%96%E8%AF%88%E7%AB%8B/">秦始皇36二世诈立</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/04/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8735%E6%9D%8E%E6%96%AF%E5%8F%98%E8%8A%82/">秦始皇35李斯变节</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/03/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8734%E6%B2%99%E4%B8%98%E6%94%BF%E5%8F%98/">秦始皇34沙丘政变</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/02/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8733%E7%A7%98%E4%B8%8D%E5%8F%91%E4%B8%A7/">秦始皇33秘不发丧</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/01/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8732%E5%A7%8B%E7%9A%87%E4%B9%8B%E6%AD%BB/">秦始皇32始皇之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/31/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8731%E7%84%9A%E4%B9%A6%E5%9D%91%E5%84%92/">秦始皇31焚书坑儒</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/30/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8730%E7%94%9F%E6%AD%BB%E8%8C%AB%E8%8C%AB/">秦始皇30生死茫茫</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/29/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8729%E4%B8%87%E9%87%8C%E9%95%BF%E5%9F%8E/">秦始皇29万里长城</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/28/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8728%E7%BB%9F%E4%B8%80%E5%88%B6%E5%BA%A6/">秦始皇28统一制度</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/27/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8727%E9%9B%86%E6%9D%83%E7%9A%87%E5%B8%9D/">秦始皇27集权皇帝</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/26/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8726%E5%85%AD%E4%B8%96%E4%BD%99%E7%83%88/">秦始皇26六世余烈</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/25/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8725%E8%82%A1%E8%82%B1%E4%B9%8B%E8%87%A3/">秦始皇25股肱之臣</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/24/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8724%E4%B8%8D%E6%88%98%E8%80%8C%E9%99%8D/">秦始皇24不战而降</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/23/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8723%E7%A7%A6%E7%81%AD%E6%A5%9A%E5%9B%BD/">秦始皇23秦灭楚国</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/09%20%E9%99%8C%E4%B8%8A%E8%8A%B1%E5%BC%80/">陌上花开</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8722%E7%A7%A6%E7%81%AD%E7%87%95%E5%9B%BD%EF%BC%88%E4%B8%8B%EF%BC%89/">秦始皇22秦灭燕国（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8722%E7%A7%A6%E7%81%AD%E7%87%95%E5%9B%BD%EF%BC%88%E4%B8%8A%EF%BC%89/">秦始皇22秦灭燕国（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/%E6%9D%82/%E6%95%95%E6%B2%B3%E8%A5%BF%E8%8A%82%E5%BA%A6%E5%85%B5%E9%83%A8%E5%B0%9A%E4%B9%A6%E5%BC%A0%E5%85%AC%E5%BE%B7%E6%94%BF%E4%B9%8B%E7%A2%91/">敕河西节度兵部尚书张公德政之碑</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/21/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8721%E6%B0%B4%E6%B7%B9%E5%A4%A7%E6%A2%81%EF%BC%88%E4%B8%8A%EF%BC%89/">秦始皇21水淹大梁（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/20/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8721%E6%B0%B4%E6%B7%B9%E5%A4%A7%E6%A2%81%EF%BC%88%E4%B8%8B%EF%BC%89/">秦始皇21水淹大梁（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/20/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8720%E8%B5%B5%E5%9B%BD%E4%B9%8B%E4%BA%A1/">秦始皇20赵国之亡</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8719%E9%82%AF%E9%83%B8%E4%B9%8B%E6%88%98/">秦始皇19邯郸之战</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/O.Henry's%20World%20@%20NO.10/">the Truth of the World @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/04%20Jim%20Hacker%20@%20NO.10/">Great Design of James Hacker @ NO.10</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/O.Henry's%20World%20@%20DAA/">O.Henry's World @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/02%20Sir%20Humphery%20@%20DAA/">Big Speeches of Sir Humphery @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/05%20Sir%20Humphrey%20@%20NO.10/">Big Big Speeches of Sir Humphery @ NO.10</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/03%20Bernard%20Woolley%20@%20DAA/">a Promising Civil Servant, Bernard @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/06%20Bernard%20Woolley%20@%20NO.10/">Lovely Bernard @ NO.10</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/01%20Jim%20Hacker%20@%20DAA/">a Die-hard Fan of Winston Churchill, James Hacker @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/18/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8718%E9%95%BF%E5%B9%B3%E4%B9%8B%E6%88%98/">秦始皇18长平之战</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/17/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8717%E7%A7%A6%E8%B5%B5%E4%B9%8B%E4%BA%89/">秦始皇17秦赵之争</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/16/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8716%E8%B5%B5%E6%AD%A6%E7%81%B5%E7%8E%8B/">秦始皇16赵武灵王</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/15/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8715%E9%9F%A9%E5%9B%BD%E4%B9%8B%E4%BA%A1%EF%BC%88%E4%B8%8B%EF%BC%89/">秦始皇15韩国之亡（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/15/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8715%E9%9F%A9%E5%9B%BD%E4%B9%8B%E4%BA%A1%EF%BC%88%E4%B8%8A%EF%BC%89/">秦始皇15韩国之亡（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/15/02%20%E6%95%B0%E5%AD%A6/00%20ReadMe/">ReadMe</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/14/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8714%E4%B8%89%E5%AE%B6%E5%88%86%E6%99%8B/">秦始皇14三家分晋</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/13/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8713%E9%9F%A9%E6%B0%8F%E5%88%9D%E5%85%B4/">秦始皇13韩氏初兴</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/12/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8712%E9%80%9A%E5%A4%A9%E5%A4%A7%E8%AE%A1/">秦始皇12通天大计</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/11/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8711%E6%9D%8E%E6%96%AF%E4%B8%BA%E6%94%BF/">秦始皇11李斯为政</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/10/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8710%E4%B8%8D%E9%9F%A6%E4%B9%8B%E6%AD%BB/">秦始皇10不韦之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/10/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/08%202021%E7%9A%84%E5%BC%80%E5%B1%80/">2021的开局</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/09/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8709%E8%B5%B5%E5%A7%AC%E4%B9%8B%E4%B9%B1/">秦始皇09赵姬之乱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/08/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8708%E7%94%9F%E7%88%B6%E4%B9%8B%E8%B0%9C/">秦始皇08生父之谜</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/07/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8707%E5%BC%82%E4%BA%BA%E5%A5%87%E7%BC%98/">秦始皇07异人奇缘</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/07/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/07%20%E6%B8%B8%E8%A4%92%E7%A6%85%E5%B1%B1%E8%AE%B0%E2%80%94%E2%80%94%E7%8E%8B%E5%AE%89%E7%9F%B3/">褒禅山记 ——王安石</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/06/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8706%E6%98%AD%E7%8E%8B%E7%A7%B0%E9%9C%B8/">秦始皇06昭王称霸</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/06/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/06%20%E5%8F%B8%E6%96%87%E9%83%8E%E2%80%94%E2%80%94%E8%92%B2%E6%9D%BE%E9%BE%84/">司文郎——蒲松龄</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/05/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8705%E5%90%88%E7%BA%B5%E8%BF%9E%E6%A8%AA%EF%BC%88%E4%B8%8B%EF%BC%89/">秦始皇05合纵连横（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/05/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8705%E5%90%88%E7%BA%B5%E8%BF%9E%E6%A8%AA%EF%BC%88%E4%B8%8A%EF%BC%89/">秦始皇05合纵连横（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/05/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/05%20%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E4%B8%80%E4%B8%AA%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB%E2%80%94%E2%80%94%E7%99%BD%E5%B2%A9%E6%9D%BE/">我们需要一个什么样的大学生活——白岩松</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/04/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/04%20%E8%AF%BB%E4%B9%A6%E7%9A%84%E5%88%9D%E5%BF%83%E2%80%94%E2%80%94%E7%8E%8B%E7%AB%8B%E7%BE%A4/">读书的初心——王立群</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/04/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8704%E5%AD%9D%E5%85%AC%E5%8F%98%E6%B3%95/">秦始皇04孝公变法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/03/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/03%20%E8%AF%BB%E5%8F%B2%E7%9A%84%E5%A2%83%E7%95%8C%E2%80%94%E2%80%94%E7%8E%8B%E7%AB%8B%E7%BE%A4/">读史的境界——王立群</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/03/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8703%E7%A9%86%E5%85%AC%E4%B8%9C%E6%89%A9/">秦始皇03穆公东扩</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/02/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8702%E8%A5%84%E5%85%AC%E7%AB%8B%E5%9B%BD/">秦始皇02襄公立国</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/02/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/02%20%E9%AB%80%E8%82%89%E5%A4%8D%E7%94%9F/">髀肉复生</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/01/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8701%E8%8D%86%E8%BD%B2%E5%88%BA%E7%A7%A6/">秦始皇01荆轲刺秦</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/01/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2000%20Programming%20in%20C%20of%20Mr.WengKai%20of%20ZjU/">Chapter 00 Programming in C of Mr.WengKai of ZjU</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/01/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/01%20Hello-World/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/01/06%20%E7%9B%AE%E5%BD%95/%E7%9B%AE%E5%BD%95/">目录</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/31/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/%E5%8F%B2%E5%AE%B6%E4%B9%8B%E7%BB%9D%E5%94%B1%20%E5%8F%B8%E9%A9%AC%E8%BF%81%E4%B8%8E%E6%8A%A5%E4%BB%BB%E5%AE%89%E4%B9%A6/">史家之绝唱——司马迁与报任安书</a></li></ul>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 XuSiyuan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo &nbsp;&nbsp;</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 1;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

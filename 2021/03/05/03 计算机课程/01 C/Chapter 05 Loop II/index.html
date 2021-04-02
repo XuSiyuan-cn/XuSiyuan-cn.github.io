@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
+  
+  
+  
+  
+  <title>Chapter 05 Loop I | 克疾文轩</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="循环（下）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter 05 Loop I">
+<meta property="og:url" content="https://github.com/XuSiyuan-cn/2021/03/05/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2005%20Loop%20II/index.html">
+<meta property="og:site_name" content="克疾文轩">
+<meta property="og:description" content="循环（下）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/U5715dd804e49409f95a0e002a76f73d7i.jpg">
+<meta property="article:published_time" content="2021-03-05T13:59:47.000Z">
+<meta property="article:modified_time" content="2021-03-29T05:39:48.358Z">
+<meta property="article:author" content="XuSiyuan">
+<meta property="article:tag" content="C语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ae01.alicdn.com/kf/U5715dd804e49409f95a0e002a76f73d7i.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="克疾文轩" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.png" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/"></a></h1>
+        </hgroup>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder="搜索一下" autocomplete="off">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/archives/">所有文章</a></li>
+                        
+                            <li><a  href="/categories/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0">英语学习</a></li>
+                        
+                            <li><a  href="/categories/%E6%95%B0%E5%AD%A6">数学</a></li>
+                        
+                            <li><a  href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B">计算机课程</a></li>
+                        
+                            <li><a  href="/categories/%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/">历史的天空</a></li>
+                        
+                            <li><a  href="/categories/%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF">克疾之路</a></li>
+                        
+                            <li><a  href="/categories/%E7%9B%AE%E5%BD%95">目录</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github"  target="_blank" href="https://github.com/XuSiyuan-cn" title="github">github</a>
+                            
+                                <a class="fl weibo"  target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                            
+                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 18.33px;">C语言</a> <a href="/tags/DAA-NO-10/" style="font-size: 15px;">DAA & NO.10</a> <a href="/tags/%E5%8E%86%E5%8F%B2/" style="font-size: 10px;">历史</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%9D%82/" style="font-size: 11.67px;">杂</a> <a href="/tags/%E6%B1%89%E9%AB%98%E7%A5%96/" style="font-size: 13.33px;">汉高祖</a> <a href="/tags/%E7%A7%A6%E5%A7%8B%E7%9A%87/" style="font-size: 20px;">秦始皇</a> <a href="/tags/%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/" style="font-size: 16.67px;">西楚霸王</a>
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="https://blog.csdn.net/weixin_44338046?spm=1000.2115.3001.5343">csdn</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="https://segmentfault.com/blog/maocg_web">segmentfault</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/eb37ef89c746/latest_articles">简书</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专业是化工，爱好是历史，想要转行计算机</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/avatar.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0">英语学习</a></li>
+                
+                    <li><a href="/categories/%E6%95%B0%E5%AD%A6">数学</a></li>
+                
+                    <li><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B">计算机课程</a></li>
+                
+                    <li><a href="/categories/%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/">历史的天空</a></li>
+                
+                    <li><a href="/categories/%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF">克疾之路</a></li>
+                
+                    <li><a href="/categories/%E7%9B%AE%E5%BD%95">目录</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/XuSiyuan-cn" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-03 计算机课程/01 C/Chapter 05 Loop II" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/03/05/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2005%20Loop%20II/" class="article-date">
+      <time datetime="2021-03-05T13:59:47.000Z" itemprop="datePublished">2021-03-05</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Chapter 05 Loop I
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/">计算机课程</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>循环（下）</p>
+<a id="more"></a>
+
+<h1 id="循环控制-break-amp-continue"><a href="#循环控制-break-amp-continue" class="headerlink" title="循环控制:break &amp; continue"></a><FONT COLOR = SpringGreen>循环控制:break &amp; continue</font></h1><h2 id="判断素数"><a href="#判断素数" class="headerlink" title="判断素数"></a><FONT COLOR = Cyan>判断素数</font></h2><p>　　只能被1和自己整除的数就是素数，1不是素数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x , i = <span class="number">2</span> ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x) ;</span><br><span class="line"><span class="keyword">for</span>( ; i &lt; x ; i++)&#123;</span><br><span class="line">	<span class="keyword">if</span>( x % i == <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;不是素数\n&quot;</span>) ;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;是素数\n&quot;</span>) ;</span><br></pre></td></tr></table></figure>
+<p>　　如果代码是这么写，如果输入素数，则结果是正常的；如果输入合数，则结果就不正常。那么对于这种循环的控制，可以考虑引入一个新的变量。<br>　　定义一个新的变量 Prime，初始值为1，然后只要 <code>x % i == 0</code>成立一次，那么 Prime 为0，最后判断 Prime 的值来判断素数还是合数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x , i = <span class="number">2</span> ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x) ;</span><br><span class="line"><span class="keyword">int</span> Prime = <span class="number">1</span> ;</span><br><span class="line"><span class="keyword">for</span>( ; i &lt; x ; i++)&#123;</span><br><span class="line">	<span class="keyword">if</span>( x % i == <span class="number">0</span>)&#123;</span><br><span class="line">		Prime = <span class="number">0</span> ;</span><br><span class="line">        <span class="keyword">break</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>( Prime == <span class="number">0</span>)&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;是合数\n&quot;</span>) ;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;是素数\n&quot;</span>) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　这里引入一个变量，来判断循环是否进入过 if ，从而对循环发起控制。</p>
+<p>　　<FONT COLOR = LimeGreen>特别注意的是 break ，break 指跳出当前的循环。</font><br>　　如果没有这个 break，程序要跑一个比较大的数，比如199988，其实进入循环的第一轮就已经确定是合数了。但因为没有break，所以程序要一直跑到 i = 199987，要多跑很多轮。<br>　　如果这里加一个 break，程序第一轮就可以出来了，极大地提高了程序的运行效率。</p>
+<p>　　和 break 相对的还有 continue。<FONT COLOR = LimeGreen>continue：跳过循环这一轮剩下语句，直接进入下一轮。</font><br>　　比如上述判断素数的题目中，可以利用 continue 求出所有的非因子（实在不知道如何表述这些东西）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x , i = <span class="number">2</span> ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x) ;</span><br><span class="line"><span class="keyword">int</span> Prime = <span class="number">1</span> ;</span><br><span class="line"><span class="keyword">for</span>( ; i &lt; x ; i++)&#123;</span><br><span class="line">	<span class="keyword">if</span>( x % i == <span class="number">0</span>)&#123;</span><br><span class="line">		Prime = <span class="number">0</span> ;</span><br><span class="line">        <span class="keyword">continue</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,i) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　因为这个 continue 的存在，所以当程序进入 if ，执行 continue 的时候，下面的 printf 就不会执行了。</p>
+<p><img src="https://ae01.alicdn.com/kf/U5715dd804e49409f95a0e002a76f73d7i.jpg"></p>
+<p>　　break，continue 都只能对本层循环做。</p>
+<h1 id="多重循环"><a href="#多重循环" class="headerlink" title="多重循环"></a><FONT COLOR = SpringGreen>多重循环</font></h1><h2 id="嵌套循环"><a href="#嵌套循环" class="headerlink" title="嵌套循环"></a><FONT COLOR = Cyan>嵌套循环</font></h2><h3 id="100以内的素数"><a href="#100以内的素数" class="headerlink" title="100以内的素数"></a><FONT COLOR = PowderBlue size = 4>100以内的素数</font></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">2</span> ;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">2</span> ;</span><br><span class="line"><span class="keyword">int</span> Prime = <span class="number">1</span> ;</span><br><span class="line"><span class="keyword">while</span>( x &lt; <span class="number">100</span> )&#123;</span><br><span class="line">	<span class="keyword">while</span>( i &lt; x )&#123;</span><br><span class="line">		<span class="keyword">if</span>( x % i == <span class="number">0</span>)&#123;</span><br><span class="line">			Prime = <span class="number">0</span> ;</span><br><span class="line">			<span class="keyword">break</span> ;</span><br><span class="line">		&#125;</span><br><span class="line">		i++ ;		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>( Prime == <span class="number">1</span> )&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,x) ;</span><br><span class="line">	&#125;</span><br><span class="line">	Prime = <span class="number">1</span> ;</span><br><span class="line">	i = <span class="number">2</span> ;</span><br><span class="line">	x++ ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　循环里面还有循环就是嵌套循环。</p>
+<h3 id="前50个素数"><a href="#前50个素数" class="headerlink" title="前50个素数"></a><FONT COLOR = PowderBlue size = 4>前50个素数</font></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">2</span> ;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">2</span> ;</span><br><span class="line"><span class="keyword">int</span> Prime = <span class="number">1</span> ;</span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">while</span>( count &lt; <span class="number">50</span> )&#123;</span><br><span class="line">	<span class="keyword">while</span>( i &lt; x )&#123;</span><br><span class="line">		<span class="keyword">if</span>( x % i == <span class="number">0</span>)&#123;</span><br><span class="line">			Prime = <span class="number">0</span> ;</span><br><span class="line">			<span class="keyword">break</span> ;</span><br><span class="line">		&#125;</span><br><span class="line">		i++ ;		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>( Prime == <span class="number">1</span> )&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,x) ;</span><br><span class="line">		count++ ;</span><br><span class="line">	&#125;</span><br><span class="line">	Prime = <span class="number">1</span> ;</span><br><span class="line">	i = <span class="number">2</span> ;</span><br><span class="line">	x++ ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　基本的思路和上一段代码一模一样，只不过多加了一个变量 count 用来计数，每成功输出一次 count 自加1。然后循环条件由 x &lt; 100 变成了 count == 50。 </p>
+<h2 id="跳出循环"><a href="#跳出循环" class="headerlink" title="跳出循环"></a><FONT COLOR = Cyan>跳出循环</font></h2><h3 id="凑硬币"><a href="#凑硬币" class="headerlink" title="凑硬币"></a><FONT COLOR = PowderBlue >凑硬币</font></h3><p>　　如何用一角、两角、五角的硬币凑出10元以下金额？主要思路是利用 for 循环，对一角、两角、五角全都遍历一遍：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> one , two , five ;</span><br><span class="line"><span class="keyword">int</span> x ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x) ;</span><br><span class="line"><span class="keyword">for</span>( one = <span class="number">0</span> ; one &lt;= x * <span class="number">10</span> ; one++ )&#123;</span><br><span class="line">	<span class="keyword">for</span>( two = <span class="number">0</span> ; two &lt;= x * <span class="number">10</span> / <span class="number">2</span>  ; two++ )&#123;</span><br><span class="line">		<span class="keyword">for</span>( five = <span class="number">0</span> ; five &lt;= x * <span class="number">10</span> / <span class="number">5</span> ; five++ ) &#123;</span><br><span class="line">			<span class="keyword">if</span>(one + two * <span class="number">2</span> + five * <span class="number">5</span> == x * <span class="number">10</span>)&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;可以用%d个一角%d个两角%d个五角\n&quot;</span>,one,two,five) ;			</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　这三个 for 循环的嵌套实际上是对三个变量的遍历，分别是 one 从0到10x；two 从0到5x；five 从0到2x。</p>
+<h3 id="接力break"><a href="#接力break" class="headerlink" title="接力break"></a><FONT COLOR = PowderBlue >接力break</font></h3><p>　　对于凑硬币，如果我们只需要一个结果，即出现一次结果就停，如何是好？如果只用一个break，那只能跳出一层循环，因此我们要多个 break。<FONT COLOR = LimeGreen>即：当满足什么样的条件下，执行 break——引入类似于判断素数 Prime 的变量</font>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> one , two , five ;</span><br><span class="line"><span class="keyword">int</span> x ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x) ;</span><br><span class="line"><span class="keyword">int</span> Prime = <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">for</span>( one = <span class="number">0</span> ; one &lt;= x * <span class="number">10</span> ; one++ )&#123;</span><br><span class="line">	<span class="keyword">for</span>( two = <span class="number">0</span> ; two &lt;= x * <span class="number">10</span> / <span class="number">2</span>  ; two++ )&#123;</span><br><span class="line">		<span class="keyword">for</span>( five = <span class="number">0</span> ; five &lt;= x * <span class="number">10</span> / <span class="number">5</span> ; five++ ) &#123;</span><br><span class="line">			<span class="keyword">if</span>(one + two * <span class="number">2</span> + five * <span class="number">5</span> == x * <span class="number">10</span>)&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;可以用%d个一角%d个两角%d个五角\n&quot;</span>,one,two,five) ;		</span><br><span class="line">				Prime = <span class="number">1</span> ;</span><br><span class="line">				<span class="keyword">break</span> ;	</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(Prime) <span class="keyword">break</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(Prime) <span class="keyword">break</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="goto"><a href="#goto" class="headerlink" title="goto"></a><FONT COLOR = PowderBlue >goto</font></h3><p>　　使用接力 break 会使得程序非常清楚，还有一个办法可以直接跳出所有循环：goto。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> one , two , five ;</span><br><span class="line"><span class="keyword">int</span> x ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x) ;</span><br><span class="line"><span class="keyword">for</span>( one = <span class="number">0</span> ; one &lt;= x * <span class="number">10</span> ; one++ )&#123;</span><br><span class="line">	<span class="keyword">for</span>( two = <span class="number">0</span> ; two &lt;= x * <span class="number">10</span> / <span class="number">2</span>  ; two++ )&#123;</span><br><span class="line">		<span class="keyword">for</span>( five = <span class="number">0</span> ; five &lt;= x * <span class="number">10</span> / <span class="number">5</span> ; five++ ) &#123;</span><br><span class="line">			<span class="keyword">if</span>(one + two * <span class="number">2</span> + five * <span class="number">5</span> == x * <span class="number">10</span>)&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;可以用%d个一角%d个两角%d个五角\n&quot;</span>,one,two,five) ;		</span><br><span class="line">				<span class="keyword">goto</span> out ;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line">out:</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span> ;</span><br></pre></td></tr></table></figure>
+<p>　　goto后面接一个标号，程序执行到 goto 时候会直接跳转到标号处。本段代码的标号是 out ，程序执行到 goto 时会直接跳转到 <code>out:</code>后面的那句中，即跳到 <code>return 0 ;</code></p>
+<p>　　goto 会破坏程序的结构性、逻辑性，慎用。尽量仅在多重循环跳转的时候使用。</p>
+<h1 id="循环习题解析"><a href="#循环习题解析" class="headerlink" title="循环习题解析"></a><FONT COLOR = SpringGreen>循环习题解析</font></h1><h2 id="前n项求和"><a href="#前n项求和" class="headerlink" title="前n项求和"></a><FONT COLOR = Cyan>前n项求和</font></h2><p><FONT COLOR = PowderBlue size = 4><strong>调和级数</strong></font><br>$$<br>f(n）=\sum_{i=1}^{n}\frac{1}{i}=1+\frac{1}{2}+\frac{1}{3}+\frac{1}{4}+…+\frac{1}{n}<br>$$</p>
+<p>像这种起点和终点都非常明确的程序，用 for 循环是最佳选择。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n) ;</span><br><span class="line"><span class="keyword">double</span> fn = <span class="number">0.0</span> ;</span><br><span class="line"><span class="keyword">double</span> i = <span class="number">1.0</span> ;</span><br><span class="line"><span class="keyword">for</span>( ; i &lt;= n  ; i++)&#123;</span><br><span class="line">	fn = fn + <span class="number">1</span> / i ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;f(%d)=%f&quot;</span>,n,fn) ;</span><br></pre></td></tr></table></figure>
+<p><FONT COLOR = PowderBlue size = 4><strong>交错调和级数</strong></font><br>$$<br>g(n）=\sum_{i=1}^{n}(-1)^{n-1}\frac{1}{i}=1-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+…+\frac{1}{n}<br>$$</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n ;</span><br><span class="line"><span class="keyword">double</span> fn = <span class="number">0.0</span> ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n) ;</span><br><span class="line"><span class="keyword">double</span> i = <span class="number">1.0</span> ;</span><br><span class="line"><span class="keyword">int</span> sign = <span class="number">1</span> ;</span><br><span class="line"><span class="keyword">for</span>( ; i &lt;= n  ; i++)&#123;</span><br><span class="line">	fn = fn + sign * <span class="number">1</span> / i ;</span><br><span class="line">	sign = -sign ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;f(%d)=%f&quot;</span>,n,fn) ;</span><br></pre></td></tr></table></figure>
+<p>　　这个正负正负正负交错就是用辅助变量 sign 来实现。</p>
+<h2 id="求最大公约数"><a href="#求最大公约数" class="headerlink" title="求最大公约数"></a><FONT COLOR = Cyan>求最大公约数</font></h2><p>给两个数，如何求最大公约数？</p>
+<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a><FONT COLOR = PowderBlue >枚举</font></h3><p>1、输入两个数 a b 。首先判断两个数中最小的是哪个。<br>2、设 t 为2。<br>3、如果 a b 都能被 t 整除，则记下这个 t 。<br>4、t 自加1后重复步骤3，直到 t 等于 min｛a，b｝。<br>5、记下的 t 中最大的就是我们要求的最大公约数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a , b , min ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;a,&amp;b) ;</span><br><span class="line"><span class="keyword">if</span>( a&lt;=b ) &#123;</span><br><span class="line">	min = a ;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	min = b ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> t = <span class="number">1</span> ; </span><br><span class="line"><span class="keyword">int</span> ret = <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">for</span>( ; t &lt;= min ; t++ )&#123;</span><br><span class="line">	<span class="keyword">if</span>( a % t == <span class="number">0</span> )&#123;</span><br><span class="line">		<span class="keyword">if</span>( b % t == <span class="number">0</span> )&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span> , t ) ;</span><br><span class="line">			ret = t ;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;最大公约数是%d&quot;</span>,ret) ;</span><br></pre></td></tr></table></figure>
+<p>　　1、为什么 t 要从1开始？我一开始是让 t 从2开始。从2开始的话，互质的两个数就没办法算公约数了。<br>　　2、ret 的作用就是记录所有的公约数，然后因为 t 是逐步上升的，所以 ret 最后输出的值也一定是最大值。</p>
+<p>　　这种方法很直观，但是缺点是程序要循环很多轮，从1开始，一直到最小的数结束。于是欧几里得发明出更加效率的求最大公约数的算法：欧几里得算法——辗转相除法。</p>
+<h3 id="辗转相除法"><a href="#辗转相除法" class="headerlink" title="辗转相除法"></a><FONT COLOR = PowderBlue >辗转相除法</font></h3><p>　　假如需要求 1997 和 615 两个正整数的最大公约数,用欧几里得算法，是这样进行的：<br>　　1997 / 615 = 3 (余 152)</p>
+<p>　　615 / 152 = 4(余7)</p>
+<p>　　152 / 7 = 21(余5)</p>
+<p>　　7 / 5 = 1 (余2)</p>
+<p>　　5 / 2 = 2 (余1)</p>
+<p>　　2 / 1 = 2 (余0)</p>
+<p>　　至此，最大公约数为1。以除数和余数反复做除法运算，当余数为 0 时，取当前算式除数为最大公约数，所以就得出了 1997 和 615 的最大公约数 1。</p>
+<p>　　<FONT COLOR = LimeGreen>定理</font>：两个整数的最大公约数等于其中较小的那个数和两数相除余数的最大公约数。<br>　　<FONT COLOR = LimeGreen>证明</font>：<br>　　设 a b 两个数，a &gt; b。a 可以表示成 a = k * b + r ，且r&lt;b。显然，r 就是 a / b的余数，k就是商。<br>　　假设 d 是 a、b 的一个公约数，且 r = a - k * b ，所以 d 也是 r 的约数。所以 a、b 与 b 、r 的公约数相等，所以他们的最大公约数也相等。<br>　　<FONT COLOR = LimeGreen>算法</font>：任意两个数a ，b。假设 t 为余数。<br>　　1、如果 b 等于0，则计算结束，a 就是最大公约数。<br>　　2、否则，t = a % b ，并且令 a = b ， b = t 。<br>　　3、回到第一步。<br>　　<FONT COLOR = LimeGreen>算法解析</font>：<br>　　1、如果 a &gt; b 。则第二步的目的就是把 b 的值赋给 a ，把余数赋给 b 。然后开始辗转相除，直到 t == 0，即余数为 0 ，此时再进行一次 第二步，则把 b 的值赋给 a ，把  t 的值赋给 b ，此时 b == 0 ，计算结束。<br>　　2、为什么没有求 min｛a，b｝的步骤，如果 a &lt; b ，经过第二步后，a 和 b会交换值，则 a &gt; b 了。<br>　　3、不妨假设 a = 12 ， b = 18 看看每步的结果：<br>　　　　 a    b    t<br>　　　　12 18 12<br>　　　　18 12  6<br>　　　　12  6   0<br>　　　　6    0   0<br>　　<FONT COLOR = LimeGreen>代码：</font></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a , b , t ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;a, &amp;b) ;</span><br><span class="line"><span class="keyword">while</span>( b != <span class="number">0</span> )&#123;</span><br><span class="line">	t = a % b ;</span><br><span class="line">	a = b ;</span><br><span class="line">	b = t ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span> (<span class="string">&quot;最大公约数是%d&quot;</span>,a) ;</span><br></pre></td></tr></table></figure>
+<h2 id="整数分解"><a href="#整数分解" class="headerlink" title="整数分解"></a><FONT COLOR = Cyan>整数分解</font></h2><h3 id="逆序分解整数"><a href="#逆序分解整数" class="headerlink" title="逆序分解整数"></a><FONT COLOR = PowderBlue >逆序分解整数</font></h3><p>　　输入一个非负整数。逆序输出它的每一位数字。比如：输入12345，输出5 4 3 2 1。<br>　　算法：<br>　　1、输入x<br>　　2、<FONT COLOR = LimeGreen>x%10，就得到了最后一位数字</font>，输出。<FONT COLOR = LimeGreen>x = x /10 ，去除了最后一位数字</font><br>　　3、x ！= 0 的话，重复步骤2。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x) ;</span><br><span class="line"><span class="keyword">int</span> t ;</span><br><span class="line"><span class="keyword">while</span>( x &gt; <span class="number">0</span> )&#123;</span><br><span class="line">	t = x % <span class="number">10</span> ;</span><br><span class="line">	x = x / <span class="number">10</span> ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,t ) ; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　这样做的话，是大差不差的，但是还是有两个细节。<br>　　第一个，如果 x 是 0 怎么办，因为题目要求 x 是非负，这段程序当 x = 0 时是不输出任何东西的。<br>　　第二个，题目给的要求里最后一个数字是没有空格的。而我这段程序输出会是5 4 3 2 1 ，1后面有个空格。</p>
+<p>　　解决办法：<br>　　1、改 while 为 do - while ，必须要循环一轮。<br>　　2、加一个判断，每一轮都输出一个空格，除了最后一轮。最后一轮x一定是个位数，根据这个来写程序。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x) ;</span><br><span class="line"><span class="keyword">int</span> t ;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	t = x % <span class="number">10</span> ;</span><br><span class="line">	x = x / <span class="number">10</span> ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,t ) ;</span><br><span class="line">	<span class="keyword">if</span>( x &gt; <span class="number">0</span> )&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>) ;</span><br><span class="line">	&#125; </span><br><span class="line">&#125;<span class="keyword">while</span>( x &gt; <span class="number">0</span> ) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>) ;</span><br></pre></td></tr></table></figure>
+<h3 id="正序分解整数"><a href="#正序分解整数" class="headerlink" title="正序分解整数"></a><FONT COLOR = PowderBlue >正序分解整数</font></h3><p>　　输入一个非负整数，正序输出它的每一位数字。比如输入12345，输出1 2 3 4 5 。</p>
+<p><FONT COLOR = LimeGreen>思路一</font>：<br>　　对于一个非负整数，首先把它逆序一遍，然后把它逆序分解，不就成了正序分解？<br>　　如何逆序一个数？算法如下：<br>　　1、引入d，p = 0。<br>　　2、d = x % 10 。这样 d 就取到了 x 的最后一位数。<FONT COLOR = LimeGreen>p = p * 10 + d </font>，x = x / 10 。这样就把 x 的末尾加到了 p 上，且 x 去掉最后一位数。<br>　　3、当 x &gt; 0 时，重复 2 。 </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span> , &amp;x) ;</span><br><span class="line"><span class="keyword">int</span> p = <span class="number">0</span> , d ;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	d = x % <span class="number">10</span> ;</span><br><span class="line">	p = p * <span class="number">10</span> + d ; </span><br><span class="line">	x = x / <span class="number">10</span> ;</span><br><span class="line">&#125; <span class="keyword">while</span>( x &gt; <span class="number">0</span> ) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;逆序的结果是%d\n&quot;</span>,p) ;</span><br><span class="line"><span class="keyword">int</span> t ;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	t = p % <span class="number">10</span> ;</span><br><span class="line">	p = p / <span class="number">10</span> ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,t) ;</span><br><span class="line">	<span class="keyword">if</span>( p &gt; <span class="number">0</span> )&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>) ;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;<span class="keyword">while</span>( p &gt; <span class="number">0</span> );</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>) ;</span><br></pre></td></tr></table></figure>
+<p>　　但这个方法有一个巨大的缺陷：当输入 700，710。等末尾有0的数时，输出会错误，主要原因是逆序的时候会出问题。</p>
+<p>　<FONT COLOR = LimeGreen>思路2：</font><br>　　1、数出输入的数 x 有多少为，比如是5位数，于是构造 mask = 10^(5-1)。<br>　　2、利用 mask 和 x 写出循环，不再是去尾巴，而是去头。</p>
+<p>　　以 5 位数为例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">12345</span>;</span><br><span class="line"><span class="keyword">int</span> mask = <span class="number">10000</span> ;</span><br><span class="line"><span class="keyword">int</span> t ;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	t = x / mask ;<span class="comment">//取出首位 </span></span><br><span class="line">	x = x % mask ;<span class="comment">//去掉首位</span></span><br><span class="line">	mask = mask / <span class="number">10</span> ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span> , t) ;</span><br><span class="line">	<span class="keyword">if</span>( x &gt; <span class="number">0</span> )&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>) ;</span><br><span class="line">	&#125; </span><br><span class="line">&#125; <span class="keyword">while</span>( x &gt; <span class="number">0</span> ) ;</span><br></pre></td></tr></table></figure>
+<p>　　这段程序有个问题，就是如果输入 x = 700 ，那么 mask = 100 。输出就会变成7。而不是要求的 7 0 0 。<br>　　原因是循环条件有问题，如果输入 700 ，那么循环只会进行一轮，第二轮就结束了，改进：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">700</span> ;</span><br><span class="line"><span class="keyword">int</span> mask = <span class="number">100</span> ;</span><br><span class="line"><span class="keyword">int</span> t ;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	t = x / mask ;<span class="comment">//取出首位 </span></span><br><span class="line">	x = x % mask ;<span class="comment">//去掉首位</span></span><br><span class="line">	mask = mask / <span class="number">10</span> ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span> , t) ;</span><br><span class="line">	<span class="keyword">if</span>( mask &gt; <span class="number">0</span> )&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>) ;</span><br><span class="line">	&#125; </span><br><span class="line">&#125; <span class="keyword">while</span>( mask &gt; <span class="number">0</span> ) ;</span><br></pre></td></tr></table></figure>
+<p>　　不用 x 作为条件，用 mask 。最后一轮的特点是，x 是个位数，mask 是 1。循环结束后 mask 会变成 0 。 </p>
+<p>　　那么如何得到这个mask呢？或者说，如何计算整数的位数？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x , mask = <span class="number">1</span> ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x) ; </span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	x = x / <span class="number">10</span> ;</span><br><span class="line">	mask = mask * <span class="number">10</span> ;</span><br><span class="line">&#125;<span class="keyword">while</span>( x &gt; <span class="number">0</span> ) ;</span><br><span class="line">mask = mask / <span class="number">10</span> ; <span class="comment">//这里mask会多走一位，所以这里除以10 </span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,mask) ;</span><br></pre></td></tr></table></figure>
+<p>　　其实 mask 从0.1开始更好，但这样就会让 mask 变成浮点数。翁老师的做法不是让 mask 最后自除一个零，而是让循环少跑一轮，改变循环的条件：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x , mask = <span class="number">1</span> ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x) ; </span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	x = x / <span class="number">10</span> ;</span><br><span class="line">	mask = mask * <span class="number">10</span> ;</span><br><span class="line">&#125;<span class="keyword">while</span>( x &gt; <span class="number">9</span> ) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,mask) ;</span><br></pre></td></tr></table></figure>
+<p>　　但这样，当 x 是个位数的时候，mask 就会判断错误，所以我还是采取我的办法，即最后让 mask 自除 10 。<br>　　这样数位数的程序就做完了，于是完整的正序分解整数程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x , mask = <span class="number">1</span> , number ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x) ; </span><br><span class="line">number = x ;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	number = number / <span class="number">10</span> ;</span><br><span class="line">	mask = mask * <span class="number">10</span> ;</span><br><span class="line">&#125;<span class="keyword">while</span>( number &gt; <span class="number">0</span> ) ;</span><br><span class="line">mask = mask / <span class="number">10</span> ; <span class="comment">//这里mask会多走一位，所以这里除以10 </span></span><br><span class="line"><span class="comment">//printf(&quot;%d\n&quot;,mask) ;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> t ;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	t = x / mask ;<span class="comment">//取出首位 </span></span><br><span class="line">	x = x % mask ;<span class="comment">//去掉首位</span></span><br><span class="line">	mask = mask / <span class="number">10</span> ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span> , t) ;</span><br><span class="line">	<span class="keyword">if</span>( mask &gt; <span class="number">0</span> )&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>) ;</span><br><span class="line">	&#125; </span><br><span class="line">&#125; <span class="keyword">while</span>( mask &gt; <span class="number">0</span> ) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;flag\n&quot;</span>) ;<span class="comment">//这个flag是看看尾巴有没有空格</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/2021/03/05/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2005%20Loop%20II/">Chapter 05 Loop I</a></p>	
+		<p><span>文章作者:</span>徐思远</a></p>
+
+        <p><span>发布时间:</span>2021年03月05日 - 21时59分</p>
+        <p><span>最后更新:</span>2021年03月29日 - 13时39分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2021/03/05/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2005%20Loop%20II/" title="Chapter 05 Loop I">https://github.com/XuSiyuan-cn/2021/03/05/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2005%20Loop%20II/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://github.com/XuSiyuan-cn/2021/03/05/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2005%20Loop%20II/　　作者: " title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a  href="/2021/03/06/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2006%20Data%20Type/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Chapter 06 Data Type
+        
+      </div>
+    </a>
+  
+  
+    <a  href="/2021/03/04/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2004%20Loop%20I/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Chapter 04 Loop I</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+//		<p><span>文章作者:</span><a  href="/" title="访问  的个人博客"></a></p>
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6-break-amp-continue"><span class="toc-number">1.</span> <span class="toc-text">循环控制:break &amp; continue</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E7%B4%A0%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">判断素数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%9A%E9%87%8D%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.</span> <span class="toc-text">多重循环</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B5%8C%E5%A5%97%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.1.</span> <span class="toc-text">嵌套循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#100%E4%BB%A5%E5%86%85%E7%9A%84%E7%B4%A0%E6%95%B0"><span class="toc-number">2.1.1.</span> <span class="toc-text">100以内的素数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D50%E4%B8%AA%E7%B4%A0%E6%95%B0"><span class="toc-number">2.1.2.</span> <span class="toc-text">前50个素数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%B3%E5%87%BA%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.2.</span> <span class="toc-text">跳出循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%91%E7%A1%AC%E5%B8%81"><span class="toc-number">2.2.1.</span> <span class="toc-text">凑硬币</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8A%9Bbreak"><span class="toc-number">2.2.2.</span> <span class="toc-text">接力break</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#goto"><span class="toc-number">2.2.3.</span> <span class="toc-text">goto</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E4%B9%A0%E9%A2%98%E8%A7%A3%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">循环习题解析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8Dn%E9%A1%B9%E6%B1%82%E5%92%8C"><span class="toc-number">3.1.</span> <span class="toc-text">前n项求和</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%82%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">求最大公约数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE"><span class="toc-number">3.2.1.</span> <span class="toc-text">枚举</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%97%E8%BD%AC%E7%9B%B8%E9%99%A4%E6%B3%95"><span class="toc-number">3.2.2.</span> <span class="toc-text">辗转相除法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E5%88%86%E8%A7%A3"><span class="toc-number">3.3.</span> <span class="toc-text">整数分解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%86%E5%BA%8F%E5%88%86%E8%A7%A3%E6%95%B4%E6%95%B0"><span class="toc-number">3.3.1.</span> <span class="toc-text">逆序分解整数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%BA%8F%E5%88%86%E8%A7%A3%E6%95%B4%E6%95%B0"><span class="toc-number">3.3.2.</span> <span class="toc-text">正序分解整数</span></a></li></ol></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section class="changyan" id="comments">
+  <!--<div id="uyan_frame"></div>-->
+  <div id="SOHUCS"></div>
+  <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
+  <script type="text/javascript">
+    window.changyan.api.config({
+      appid: 'xxxx',
+      conf: 'xxxxxxxxx'
+    });
+  </script>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/2021/03/06/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2006%20Data%20Type/" title="上一篇: Chapter 06 Data Type">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/2021/03/04/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2004%20Loop%20I/" title="下一篇: Chapter 04 Loop I">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/03/24/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/10%20%E4%B8%89%E6%9C%88%E7%9A%84%E7%BB%93%E6%9D%9F/">3月的结束</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/16/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2016%20Interactive%20Graphic%20Design/">Chapter 16 Interactive Graphic Design</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/15/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2015%20ACLLib/">Chapter 15 ACLLib</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/14/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2014%20Linked%20List/">Chapter 14 Linked List</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/13/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2013%20File/">Chapter 13 File</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/12/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2012%20Program%20Structure/">Chapter 12 Program Structure</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/11/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2011%20Structure%20Type/">Chapter 11 Structure Type</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/10/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2010%20Strings/">Chapter 10 Strings</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/09/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2009%20Pointers/">Chapter 09 Pointers</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/08/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2008%20Array/">Chapter 08 Array</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/07/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2007%20Function/">chapter 07 Function</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/06/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2006%20Data%20Type/">Chapter 06 Data Type</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/05/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2005%20Loop%20II/">Chapter 05 Loop I</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/04/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2004%20Loop%20I/">Chapter 04 Loop I</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/03/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/03%E6%B1%89%E9%AB%98%E7%A5%96/%E6%B1%89%E9%AB%98%E7%A5%9603%E8%A5%BF%E5%85%A5%E7%A7%A6%E5%85%B3/">汉高祖03西入秦关</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/03/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2003%20Judgment/">Chapter 03 Judgment</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/02/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2002%20Calculation/">Chapter 02 Calculation</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/01/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2001%20Introduction/">Chapter 01 Introduction</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/27/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/03%E6%B1%89%E9%AB%98%E7%A5%96/%E6%B1%89%E9%AB%98%E7%A5%9602%E6%97%B6%E4%BB%A3%E7%8E%89%E6%88%90/">汉高祖02时代玉成</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/26/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/03%E6%B1%89%E9%AB%98%E7%A5%96/%E6%B1%89%E9%AB%98%E7%A5%9601%E4%BC%A0%E5%A5%87%E7%9A%87%E5%B8%9D/">汉高祖01传奇皇帝</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/25/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD09%E5%9B%9B%E9%9D%A2%E6%A5%9A%E6%AD%8C/">项羽09四面楚歌</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/24/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD08%E9%9C%B8%E7%8E%8B%E5%88%AB%E5%A7%AC/">项羽08霸王别姬</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/23/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD07%E6%80%A7%E6%A0%BC%E4%BD%BF%E7%84%B6/">项羽07性格使然</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/%E6%9D%82/%E5%8F%A4%E4%BB%A3%E6%88%98%E4%BA%89%E4%B8%8B%E7%99%BE%E5%A7%93%E7%9A%84%E7%94%9F%E6%B4%BB/">古代战争下百姓的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD06%E8%8D%A5%E9%98%B3%E4%BC%9A%E6%88%98/">项羽06荥阳会战</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/21/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD05%E7%94%9F%E6%AD%BB%E5%86%B3%E6%88%98/">项羽05生死决战</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/20/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD04%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/">项羽04西楚霸王</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/19/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD03%E9%B8%BF%E9%97%A8%E5%AE%B4%E4%BC%9A/">项羽03鸿门宴会</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/18/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD02%E9%A1%B9%E7%BE%BD%E5%85%A5%E5%85%B33%EF%BC%88%E4%B8%8B%EF%BC%89/">项羽02项羽入关（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/17/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD02%E9%A1%B9%E7%BE%BD%E5%85%A5%E5%85%B32%EF%BC%88%E4%B8%AD%EF%BC%89/">项羽02项羽入关（中）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/17/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD02%E9%A1%B9%E7%BE%BD%E5%85%A5%E5%85%B31%EF%BC%88%E4%B8%8A%EF%BC%89/">项羽02项羽入关（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/16/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD01%E9%9C%B8%E7%8E%8B%E5%87%BA%E4%B8%96/">项羽01霸王出世</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/15/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8747%E9%9A%BE%E8%AF%B4%E5%86%8D%E8%A7%81/">秦始皇47难说再见</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/14/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8746%E5%8D%83%E5%8F%A4%E4%B8%80%E5%B8%9D/">秦始皇46千古一帝</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/13/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8745%E5%94%90%E4%BA%BA%E8%AE%BA%E7%A7%A6/">秦始皇45唐人论秦</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/12/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8744%E6%B1%89%E5%84%92%E8%AF%84%E7%A7%A6/">秦始皇44汉儒评秦</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/11/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8743%E7%9B%97%E9%99%B5%E6%AF%81%E9%99%B5/">秦始皇43盗陵毁陵</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/11/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8742%E7%9A%87%E9%99%B5%E4%B9%8B%E8%B0%9C/">秦始皇42皇陵之谜</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/10/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8741%E5%AD%90%E5%A9%B4%E4%BA%A1%E5%9B%BD/">秦始皇41子婴亡国</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/09/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8740%E8%B5%B5%E9%AB%98%E4%B9%8B%E6%AD%BB/">秦始皇40赵高之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/08/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8739%E8%83%A1%E4%BA%A5%E4%B9%8B%E6%AD%BB/">秦始皇39胡亥之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/07/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8738%E6%9D%8E%E6%96%AF%E4%B9%8B%E6%AD%BB/">秦始皇38李斯之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/06/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8737%E5%B7%A9%E5%9B%BA%E5%B8%9D%E4%BD%8D/">秦始皇37巩固帝位</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/05/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8736%E4%BA%8C%E4%B8%96%E8%AF%88%E7%AB%8B/">秦始皇36二世诈立</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/04/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8735%E6%9D%8E%E6%96%AF%E5%8F%98%E8%8A%82/">秦始皇35李斯变节</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/03/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8734%E6%B2%99%E4%B8%98%E6%94%BF%E5%8F%98/">秦始皇34沙丘政变</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/02/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8733%E7%A7%98%E4%B8%8D%E5%8F%91%E4%B8%A7/">秦始皇33秘不发丧</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/01/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8732%E5%A7%8B%E7%9A%87%E4%B9%8B%E6%AD%BB/">秦始皇32始皇之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/31/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8731%E7%84%9A%E4%B9%A6%E5%9D%91%E5%84%92/">秦始皇31焚书坑儒</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/30/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8730%E7%94%9F%E6%AD%BB%E8%8C%AB%E8%8C%AB/">秦始皇30生死茫茫</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/29/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8729%E4%B8%87%E9%87%8C%E9%95%BF%E5%9F%8E/">秦始皇29万里长城</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/28/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8728%E7%BB%9F%E4%B8%80%E5%88%B6%E5%BA%A6/">秦始皇28统一制度</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/27/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8727%E9%9B%86%E6%9D%83%E7%9A%87%E5%B8%9D/">秦始皇27集权皇帝</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/26/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8726%E5%85%AD%E4%B8%96%E4%BD%99%E7%83%88/">秦始皇26六世余烈</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/25/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8725%E8%82%A1%E8%82%B1%E4%B9%8B%E8%87%A3/">秦始皇25股肱之臣</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/24/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8724%E4%B8%8D%E6%88%98%E8%80%8C%E9%99%8D/">秦始皇24不战而降</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/23/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8723%E7%A7%A6%E7%81%AD%E6%A5%9A%E5%9B%BD/">秦始皇23秦灭楚国</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/09%20%E9%99%8C%E4%B8%8A%E8%8A%B1%E5%BC%80/">陌上花开</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8722%E7%A7%A6%E7%81%AD%E7%87%95%E5%9B%BD%EF%BC%88%E4%B8%8B%EF%BC%89/">秦始皇22秦灭燕国（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8722%E7%A7%A6%E7%81%AD%E7%87%95%E5%9B%BD%EF%BC%88%E4%B8%8A%EF%BC%89/">秦始皇22秦灭燕国（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/%E6%9D%82/%E6%95%95%E6%B2%B3%E8%A5%BF%E8%8A%82%E5%BA%A6%E5%85%B5%E9%83%A8%E5%B0%9A%E4%B9%A6%E5%BC%A0%E5%85%AC%E5%BE%B7%E6%94%BF%E4%B9%8B%E7%A2%91/">敕河西节度兵部尚书张公德政之碑</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/21/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8721%E6%B0%B4%E6%B7%B9%E5%A4%A7%E6%A2%81%EF%BC%88%E4%B8%8A%EF%BC%89/">秦始皇21水淹大梁（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/20/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8721%E6%B0%B4%E6%B7%B9%E5%A4%A7%E6%A2%81%EF%BC%88%E4%B8%8B%EF%BC%89/">秦始皇21水淹大梁（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/20/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8720%E8%B5%B5%E5%9B%BD%E4%B9%8B%E4%BA%A1/">秦始皇20赵国之亡</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8719%E9%82%AF%E9%83%B8%E4%B9%8B%E6%88%98/">秦始皇19邯郸之战</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/O.Henry's%20World%20@%20NO.10/">the Truth of the World @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/04%20Jim%20Hacker%20@%20NO.10/">Great Design of James Hacker @ NO.10</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/O.Henry's%20World%20@%20DAA/">O.Henry's World @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/02%20Sir%20Humphery%20@%20DAA/">Big Speeches of Sir Humphery @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/05%20Sir%20Humphrey%20@%20NO.10/">Big Big Speeches of Sir Humphery @ NO.10</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/03%20Bernard%20Woolley%20@%20DAA/">a Promising Civil Servant, Bernard @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/06%20Bernard%20Woolley%20@%20NO.10/">Lovely Bernard @ NO.10</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/01%20Jim%20Hacker%20@%20DAA/">a Die-hard Fan of Winston Churchill, James Hacker @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/18/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8718%E9%95%BF%E5%B9%B3%E4%B9%8B%E6%88%98/">秦始皇18长平之战</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/17/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8717%E7%A7%A6%E8%B5%B5%E4%B9%8B%E4%BA%89/">秦始皇17秦赵之争</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/16/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8716%E8%B5%B5%E6%AD%A6%E7%81%B5%E7%8E%8B/">秦始皇16赵武灵王</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/15/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8715%E9%9F%A9%E5%9B%BD%E4%B9%8B%E4%BA%A1%EF%BC%88%E4%B8%8B%EF%BC%89/">秦始皇15韩国之亡（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/15/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8715%E9%9F%A9%E5%9B%BD%E4%B9%8B%E4%BA%A1%EF%BC%88%E4%B8%8A%EF%BC%89/">秦始皇15韩国之亡（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/15/02%20%E6%95%B0%E5%AD%A6/00%20ReadMe/">ReadMe</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/14/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8714%E4%B8%89%E5%AE%B6%E5%88%86%E6%99%8B/">秦始皇14三家分晋</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/13/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8713%E9%9F%A9%E6%B0%8F%E5%88%9D%E5%85%B4/">秦始皇13韩氏初兴</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/12/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8712%E9%80%9A%E5%A4%A9%E5%A4%A7%E8%AE%A1/">秦始皇12通天大计</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/11/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8711%E6%9D%8E%E6%96%AF%E4%B8%BA%E6%94%BF/">秦始皇11李斯为政</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/10/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8710%E4%B8%8D%E9%9F%A6%E4%B9%8B%E6%AD%BB/">秦始皇10不韦之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/10/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/08%202021%E7%9A%84%E5%BC%80%E5%B1%80/">2021的开局</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/09/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8709%E8%B5%B5%E5%A7%AC%E4%B9%8B%E4%B9%B1/">秦始皇09赵姬之乱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/08/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8708%E7%94%9F%E7%88%B6%E4%B9%8B%E8%B0%9C/">秦始皇08生父之谜</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/07/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8707%E5%BC%82%E4%BA%BA%E5%A5%87%E7%BC%98/">秦始皇07异人奇缘</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/07/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/07%20%E6%B8%B8%E8%A4%92%E7%A6%85%E5%B1%B1%E8%AE%B0%E2%80%94%E2%80%94%E7%8E%8B%E5%AE%89%E7%9F%B3/">褒禅山记 ——王安石</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/06/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8706%E6%98%AD%E7%8E%8B%E7%A7%B0%E9%9C%B8/">秦始皇06昭王称霸</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/06/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/06%20%E5%8F%B8%E6%96%87%E9%83%8E%E2%80%94%E2%80%94%E8%92%B2%E6%9D%BE%E9%BE%84/">司文郎——蒲松龄</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/05/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8705%E5%90%88%E7%BA%B5%E8%BF%9E%E6%A8%AA%EF%BC%88%E4%B8%8B%EF%BC%89/">秦始皇05合纵连横（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/05/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8705%E5%90%88%E7%BA%B5%E8%BF%9E%E6%A8%AA%EF%BC%88%E4%B8%8A%EF%BC%89/">秦始皇05合纵连横（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/05/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/05%20%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E4%B8%80%E4%B8%AA%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB%E2%80%94%E2%80%94%E7%99%BD%E5%B2%A9%E6%9D%BE/">我们需要一个什么样的大学生活——白岩松</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/04/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/04%20%E8%AF%BB%E4%B9%A6%E7%9A%84%E5%88%9D%E5%BF%83%E2%80%94%E2%80%94%E7%8E%8B%E7%AB%8B%E7%BE%A4/">读书的初心——王立群</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/04/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8704%E5%AD%9D%E5%85%AC%E5%8F%98%E6%B3%95/">秦始皇04孝公变法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/03/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/03%20%E8%AF%BB%E5%8F%B2%E7%9A%84%E5%A2%83%E7%95%8C%E2%80%94%E2%80%94%E7%8E%8B%E7%AB%8B%E7%BE%A4/">读史的境界——王立群</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/03/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8703%E7%A9%86%E5%85%AC%E4%B8%9C%E6%89%A9/">秦始皇03穆公东扩</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/02/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8702%E8%A5%84%E5%85%AC%E7%AB%8B%E5%9B%BD/">秦始皇02襄公立国</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/02/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/02%20%E9%AB%80%E8%82%89%E5%A4%8D%E7%94%9F/">髀肉复生</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/01/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8701%E8%8D%86%E8%BD%B2%E5%88%BA%E7%A7%A6/">秦始皇01荆轲刺秦</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/01/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2000%20Programming%20in%20C%20of%20Mr.WengKai%20of%20ZjU/">Chapter 00 Programming in C of Mr.WengKai of ZjU</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/01/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/01%20Hello-World/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/01/06%20%E7%9B%AE%E5%BD%95/%E7%9B%AE%E5%BD%95/">目录</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/31/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/%E5%8F%B2%E5%AE%B6%E4%B9%8B%E7%BB%9D%E5%94%B1%20%E5%8F%B8%E9%A9%AC%E8%BF%81%E4%B8%8E%E6%8A%A5%E4%BB%BB%E5%AE%89%E4%B9%A6/">史家之绝唱——司马迁与报任安书</a></li></ul>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 XuSiyuan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo &nbsp;&nbsp;</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 1;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
