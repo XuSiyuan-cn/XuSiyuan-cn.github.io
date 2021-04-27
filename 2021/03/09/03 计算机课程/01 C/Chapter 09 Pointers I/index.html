@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
+  
+  
+  
+  
+  <title>Chapter 09 Pointers I | 克疾文轩</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="指针（上）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter 09 Pointers I">
+<meta property="og:url" content="https://github.com/XuSiyuan-cn/2021/03/09/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2009%20Pointers%20I/index.html">
+<meta property="og:site_name" content="克疾文轩">
+<meta property="og:description" content="指针（上）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.hualigs.cn/image/606930106c1cd.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/606b06c98d387.jpg">
+<meta property="article:published_time" content="2021-03-09T13:59:47.000Z">
+<meta property="article:modified_time" content="2021-04-06T13:47:42.447Z">
+<meta property="article:author" content="XuSiyuan">
+<meta property="article:tag" content="C语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.hualigs.cn/image/606930106c1cd.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="克疾文轩" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.png" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/"></a></h1>
+        </hgroup>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder="搜索一下" autocomplete="off">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/archives/">所有文章</a></li>
+                        
+                            <li><a  href="/categories/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0">英语学习</a></li>
+                        
+                            <li><a  href="/categories/%E6%95%B0%E5%AD%A6">数学</a></li>
+                        
+                            <li><a  href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B">计算机课程</a></li>
+                        
+                            <li><a  href="/categories/%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/">历史的天空</a></li>
+                        
+                            <li><a  href="/categories/%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF">克疾之路</a></li>
+                        
+                            <li><a  href="/categories/%E7%9B%AE%E5%BD%95">目录</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github"  target="_blank" href="https://github.com/XuSiyuan-cn" title="github">github</a>
+                            
+                                <a class="fl weibo"  target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                            
+                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 18.33px;">C语言</a> <a href="/tags/DAA-NO-10/" style="font-size: 15px;">DAA & NO.10</a> <a href="/tags/%E5%8E%86%E5%8F%B2/" style="font-size: 10px;">历史</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%9D%82/" style="font-size: 11.67px;">杂</a> <a href="/tags/%E6%B1%89%E9%AB%98%E7%A5%96/" style="font-size: 13.33px;">汉高祖</a> <a href="/tags/%E7%A7%A6%E5%A7%8B%E7%9A%87/" style="font-size: 20px;">秦始皇</a> <a href="/tags/%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/" style="font-size: 16.67px;">西楚霸王</a>
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="https://blog.csdn.net/weixin_44338046?spm=1000.2115.3001.5343">csdn</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="https://segmentfault.com/blog/maocg_web">segmentfault</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/eb37ef89c746/latest_articles">简书</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专业是化工，爱好是历史，想要转行计算机</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/avatar.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0">英语学习</a></li>
+                
+                    <li><a href="/categories/%E6%95%B0%E5%AD%A6">数学</a></li>
+                
+                    <li><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B">计算机课程</a></li>
+                
+                    <li><a href="/categories/%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/">历史的天空</a></li>
+                
+                    <li><a href="/categories/%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF">克疾之路</a></li>
+                
+                    <li><a href="/categories/%E7%9B%AE%E5%BD%95">目录</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/XuSiyuan-cn" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-03 计算机课程/01 C/Chapter 09 Pointers I" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/03/09/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2009%20Pointers%20I/" class="article-date">
+      <time datetime="2021-03-09T13:59:47.000Z" itemprop="datePublished">2021-03-09</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Chapter 09 Pointers I
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/">计算机课程</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>指针（上）</p>
+<a id="more"></a>
+
+<h1 id="取地址运算"><a href="#取地址运算" class="headerlink" title="取地址运算"></a><FONT COLOR = SpringGreen>取地址运算</font></h1><h2 id="运算符-amp"><a href="#运算符-amp" class="headerlink" title="运算符&amp;"></a><FONT COLOR = Cyan>运算符&amp;</font></h2><p>　　在C里面，&amp;也是运算符，为取地址运算，最典型的就是<code>scanf(&quot;%d&quot;,&amp;i)</code>里面的 &amp;<br>　　<FONT COLOR = LimeGreen>&amp; ：作为运算符，是获得变量的地址，它的操作数必须是变量！</font>C语言里的变量是放在内存里面的，每一个变量都会在内存中占据一定的位置和大小。比如 int 是四个字节，这个变量有大小，内存需要有一个地方放置，放置变量这个地方就是地址。&amp; 就是把这个变量的地址拿出来。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span> ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;0x%x\n&quot;</span>,&amp;i) ;</span><br></pre></td></tr></table></figure>
+<p>　　地址用16进制表达起来比较方便，所以在输出 %x 前面加一个<code>0x</code>，其中 %x 表示以十六进制数形式输出整数，对于地址的表达，用16进制比较方便。把 i 的地址取出来，用<code>printf</code>输出。此时程序给出的结果是：<code>0x22fe4c</code>。<br>　　有的编译器可能会给一个warning：</p>
+<blockquote>
+<p>warning: format specifies type ‘unsigned int’ but the argument has type ‘ int * ‘</p>
+</blockquote>
+<p>　　这个warning的意思是，如果你想要<code>printf</code>给你输出一个地址，输出的时候不应该用 %x ，而是使用 %p。：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span> ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,&amp;i) ;</span><br></pre></td></tr></table></figure>
+<p>　　<FONT COLOR = LimeGreen><code>%p</code>的意思是把这个值作为一个地址来输出，输出的时候自己会在前面加<code>0x</code>，是以16进制的方式输出这个地址， 如果输出数据不够8位数，则左边补零。  </font>此时输出值是：<code>000000000022fe4c</code>。<Font Size = 2>这里我补了16位数，有可能是因为的我的编译器为64位</font></p>
+<p>　　这两个地址实际上表达的是一个位置，看起来像是一个数，尝试能不能对这个数进行操作？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">int</span> p ;</span><br><span class="line">p = &amp;i ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,&amp;i) ;</span><br></pre></td></tr></table></figure>
+<p>　　此时编译器会有一个 warning:</p>
+<blockquote>
+<p>[Warning] assignment makes integer from pointer without a cast [enabled by default]</p>
+</blockquote>
+<p>　　这个 warning 是需要类型转换的意思，需要从指针型转换为 int 型，若忽视 warning 强行输出，则结果为：<code>000000000022fe48</code>。解决掉这个 warning ，只需要一次强行类型转换即可：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">int</span> p ;</span><br><span class="line">p = (<span class="keyword">int</span>) &amp;i ;<span class="comment">//我的电脑在编译的时候这里任然有类型转换的 warning，初步认为是编译器的问题，换成更加严格的在线编译器之后通过！</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;0x%x\n&quot;</span>,p) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,&amp;i) ;</span><br></pre></td></tr></table></figure>
+<p>　　此时两条代码的编译结果都是<code>0x22fe48</code>。<br>　　注：<Font Size = 2>特别的，关于 &amp;i 和 int 类型的东西，在32位架构下，两者大小是相同的，但是在64位架构下，两者并不相同。</font>所以关于这段代码的编译结果，对于 32 位系统，编译结果相同；对于64位系统，编译结果可能不同，但是后 8 位是一模一样的，比如结果可能是<code>0x5c961d28</code>和<code>0x7fff5c961d28</code>。还有一个例子更好地说明在 64 位架构下，<code>int</code>和<code>&amp;i</code>的区别：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">int</span> p ;</span><br><span class="line">p = (<span class="keyword">int</span>) &amp;i ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;0x%x\n&quot;</span>,p) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,&amp;i) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%lu\n&quot;</span>,<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%lu\n&quot;</span>,<span class="keyword">sizeof</span>(&amp;i));</span><br></pre></td></tr></table></figure>
+<p>　　结果分别是：<code>0x22fe48、000000000x22fe48、4、8</code>。说明在64位架构下，int 的大小是4，而 &amp;i 的大小是8。在32位架构下，int 的大小是4 ，&amp;i 的大小也是4。</p>
+<p>　　综上：一个变量，它的地址的大小是否与 int 相同取决于编译器，取决于系统是64位架构还是32位架构。地址和整数并不永远是相同的，所以对于地址的输出，我们采用 %p 的方式。</p>
+<h2 id="不能取的地址"><a href="#不能取的地址" class="headerlink" title="不能取的地址"></a><FONT COLOR = Cyan>不能取的地址</font></h2><p>　　<FONT COLOR = LimeGreen>&amp; 不能对没有地址的东西取地址</font>。如果右边不是一个变量，则不能取地址！<br>　　<code>&amp;(a+b)</code>、<code>&amp;(a++)</code>、<code>&amp;(++a)</code>此时右边是一个表达式，所以不能取地址</p>
+<blockquote>
+<p>[Error] lvalue required as unary ‘&amp;’ operand</p>
+<p>error: cannot take the address of an rvalue of type ‘int’</p>
+</blockquote>
+<h2 id="常见的地址"><a href="#常见的地址" class="headerlink" title="常见的地址"></a><FONT COLOR = Cyan>常见的地址</font></h2><p><Font Color = DarkCyan size = 4 Face = 仿宋><strong>变量的地址</strong></font></p>
+<p>　　上面已经阐述过，不再赘述</p>
+<p><Font Color = DarkCyan size = 4 Face = 仿宋><strong>相邻的变量的地址</strong></font></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">int</span> j ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,&amp;i) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,&amp;j) ;</span><br></pre></td></tr></table></figure>
+<p>　　输出结果分别是：<code>0x22FE4C</code>、<code>0x22FE48</code>可以看出来，定义的相邻的变量，地址也是相邻的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">int</span> j ;</span><br><span class="line"><span class="keyword">int</span> k ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,&amp;i) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,&amp;j) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,&amp;k) ;</span><br></pre></td></tr></table></figure>
+<p>　　输出的结果分别是：<code>0x22FE4C</code>、<code>0x22FE48</code>、<code>0x22FE44</code>说明在内存里面，他们都是紧挨着的。<br>　　其中也可以看出来，最先定义的 i 占据比较位置比较大，然后是后面定义的 j 然后是后面定义的 k 。</p>
+<p><img src="https://www.hualigs.cn/image/606930106c1cd.jpg"></p>
+<p>　　在内存中，最先定义的 i 在最高的地方，然后是 j  最低的地方是最后定义的 k 。C 的内存模型会将本地变量分配在“堆栈 stack”，在堆栈中，分配变量是“自顶向下”分配的。先写的变量地址最高，后写的变量地址变低，依次紧挨着排列。他们的地址相差一个<code>sizeof(int)</code>。<font color = red>为什么这里相差一个<code>sizeof(int)</code>而不是一个<code>sizeof(&amp;i)</code>?</font></p>
+<p><Font Color = DarkCyan size = 4 Face = 仿宋><strong><code>&amp;</code>的结果和 <code>sizeof</code></strong></font></p>
+<p>　　前面已经讨论过，不同编译器和不同架构下，<code>sizeof</code>的结果不一样，32位占据4，64位占据8。</p>
+<p><Font Color = DarkCyan size = 4 Face = 仿宋><strong>数组的地址</strong></font></p>
+<p><Font Color = DarkCyan size = 4 Face = 仿宋><strong>数组单元的地址</strong></font></p>
+<p><Font Color = DarkCyan size = 4 Face = 仿宋><strong>相邻的数组单元的地址</strong></font></p>
+<p>　　用以下代码来验证：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>] ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,&amp;a) ;<span class="comment">//数组的地址</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,&amp;a[<span class="number">0</span>]) ;<span class="comment">//数组单元的地址</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,&amp;a[<span class="number">1</span>] );<span class="comment">//相邻的数组单元的地址</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,a) ;<span class="comment">//试图直接把a交给printf输出地址</span></span><br></pre></td></tr></table></figure>
+<p>　　结果分别是：<code>22FE20、22FE20、22FE24、22FE20</code>。相邻数组单元的地址相差永远是 4 。说明他们是紧挨着的。</p>
+<p><img src="https://www.hualigs.cn/image/606b06c98d387.jpg"></p>
+<h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a><FONT COLOR = SpringGreen>指针</font></h1><h2 id="指针变量"><a href="#指针变量" class="headerlink" title="指针变量"></a><FONT COLOR = Cyan>指针变量</font></h2><p>　　如果能够将取得的变量的地址，然后将这个地址作为一个值传递给一个函数，那么这个函数能否通过这个地址访问到这个变量呢？比如函数<code>scanf(&quot;%d&quot;,&amp;i)</code>，他到底是如何工作的？<br>　　在使用<code>scanf</code>的时候，会传给这个函数一个变量的地址，然后<code>scanf</code>拿我们传给它的这个地址，放到我们指定的变量中去。这些功能是如何实现的？<code>scanf</code>的原型应该是怎样的？如果我们需要一个参数能够保存别的变量的地址，如何表达能够保存地址的变量？</p>
+<p>　　从分析<code>scanf</code>的功能可以看出来，<code>scanf</code>一定有办法，可以接受用户输入变量的地址。有前面尝试可以知道，不能把地址交给整数，因为 int 和 地址 长度不一样，在不同编译情况下，他们可能不相等。所以在C语言里，用指针来保存地址。</p>
+<p>　　在C语言里，指针就是保存地址的变量：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i ;</span><br><span class="line"><span class="keyword">int</span>* p = &amp;i ;<span class="comment">//*p就表示p是一个指针变量，用来保存 i 的地址</span></span><br><span class="line"><span class="keyword">int</span>* p,q ;<span class="comment">//*作用在p上，无法作用在q上。</span></span><br><span class="line"><span class="keyword">int</span> *p,q ;<span class="comment">//这句话和上面那句是一样的。</span></span><br></pre></td></tr></table></figure>
+<p>　　<code>int* p = &amp;i</code> p 是指针，指向 i 的地址，如果说“ p 指向 i ”意思就是指针变量 p 里面保存的是 i 的地址。</p>
+<p><FONT COLOR = LimeGreen>　　指针变量的值就是内存的地址。普通变量的值是实际的值，指针变量的值是具有实际值的变量的地址。</font>指针变量里面不会储存实际的值，只会放别的变量的地址。</p>
+<h2 id="函数与指针"><a href="#函数与指针" class="headerlink" title="函数与指针"></a><FONT COLOR = Cyan>函数与指针</font></h2><p>　　如果把指针作为函数的参数会怎么样？就像<code>scanf(&quot;%d&quot;,&amp;i)</code>：<br>　　<code>void f(int *p)</code>此时表示函数 f 需要一个指针，如果要调用这个函数，就需要交给他一个地址：<code>int i = 0 ； f(&amp;i)</code>。此时不能交给 f 这个变量本身，必须要用 &amp; 取得 i 的地址交给 f ，函数才会生效。比如如下例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">( <span class="keyword">int</span> *p )</span> </span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span> ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;&amp;i = %p\n&quot;</span>,&amp;i) ; <span class="comment">//直接输出 i 的地址</span></span><br><span class="line">f(&amp;i) ;<span class="comment">//把 i 的地址交给 f 函数</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">( <span class="keyword">int</span> *p )</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot; p = %p\n&quot;</span>,p) ;  <span class="comment">//让函数输出 p 的地址</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>　　可以看到，两个值是一样的。此时就可以说 p 是一个指针，指向 i 。此时在 f 函数里面，可以得到 main 函数里面变量的地址了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">( <span class="keyword">int</span> *p )</span> </span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">( <span class="keyword">int</span> k )</span> </span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span> ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;&amp;i = %p\n&quot;</span>,&amp;i) ;</span><br><span class="line">f(&amp;i) ;</span><br><span class="line">g(i) ;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">( <span class="keyword">int</span> *p )</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot; p = %p\n&quot;</span>,p) ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">( <span class="keyword">int</span> k )</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot; k = %d\n&quot;</span>,k) ;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<p>　　此时 f 拿到了 i 的地址，但是 g 只拿到了 i 的值。g 这个函数里面拿到的值和 main 函数是没有关系的，g 函数无法访问 main 函数。但是 f 是可以通过指针来访问 main 函数。</p>
+<h2 id="访问地址"><a href="#访问地址" class="headerlink" title="访问地址"></a><FONT COLOR = Cyan>访问地址</font></h2><p>　　有了指针之后，有了地址之后，如何访问这个地址上的变量呢？<FONT COLOR = LimeGreen>使用 * ，用 * 来访问指针所指向的那个地址上的变量。此时 * 是一个单目运算符，用来访问指针的值所表示的低智商的变量。</font>可以做右值，也可以做左值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;i ;<span class="comment">// p 指向 i</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;&amp;i = %p\n&quot;</span>,&amp;i) ;<span class="comment">//查看 i 的地址</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot; p = %p\n&quot;</span>,p) ;<span class="comment">//查看 p 的值</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;&amp;p = %p\n&quot;</span>,&amp;p) ;<span class="comment">//查看 p 的地址</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;*p = %d\n&quot;</span>,*p) ;<span class="comment">//*p 作为一个整体，表示的是 i 的值，所以是一个整数，此时 *p 作为右值</span></span><br><span class="line">*p =  <span class="number">1</span> ;<span class="comment">//此时 *p作为左值</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot; i = %d\n&quot;</span>,i) ; <span class="comment">//查看 i 的值。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>　　最后的结果是：</p>
+<blockquote>
+<p>&amp;i = 0x100010<br> p = 0x100010<br>&amp;p = 0x100018<br>*p = 0<br>i = 1</p>
+</blockquote>
+<p>　　1、把 i 的地址交给 p 后，p 的值就是 i 的地址，而 p 的地址和 i 的地址不相同<br>　　2、<code>printf(&quot;*p = %d\n&quot;,*p)</code>这一步相当于是<code>int k = *p ; printf(&quot;k = %d\n&quot;,k </code>，所以也就证明了，*p 读取了 i 的值。说明 *p 可以作为右值，读取地址上的值，成功。<br>　　3、<code>*p =  1</code>就是修改地址上的值，最后可以看到<code> i = 1</code>，所以修改地址上的值也成功。</p>
+<p>　　综上，<code>*p</code>可以访问地址上的值，也可以修改地址上的值。 </p>
+<h2 id="左值"><a href="#左值" class="headerlink" title="左值"></a><FONT COLOR = Cyan>左值</font></h2><p>　　在做赋值运算的时候，赋值号左边可以不是变量，左边可以是值。这种可以被赋值的值，称之为左值：<br>　　<code>a[0] = 2 ；</code>这里左边不是变量，是值，是表达式计算的结果，[ ] 是特殊的运算符，用来取数组的下标。<br>　　<code>*p = 2 ；</code>这里左边也不是变量，而是指向变量的值，是表达式计算的结果， 但是他也能赋值。<br>　　所以严格意义上来说，赋值号左边不一定是变量，所以称之为左值；赋值号右边称之为右值。</p>
+<h2 id="amp-和"><a href="#amp-和" class="headerlink" title="&amp; 和 *"></a><FONT COLOR = Cyan>&amp; 和 *</font></h2><p>　　在指针中，有两个运算符，他们是互为相反作用的：<br>　　&amp;：取变量的地址。*：访问地址上的变量。可以说他们是互为逆运算：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*a = &amp;A</span><br><span class="line">*&amp;A → *(&amp;A) → *(A的地址) → 得到那个地址上的值 → A的值      </span><br><span class="line">&amp;*a → &amp;(*a) → &amp;(地址上的值，就是A) →得到A的地址→ A的地址就是a</span><br></pre></td></tr></table></figure>
+<h2 id="scanf的”不合理”"><a href="#scanf的”不合理”" class="headerlink" title="scanf的”不合理”"></a><FONT COLOR = Cyan><code>scanf</code>的”不合理”</font></h2><p>　　为什么像这种代码编译器不会报错：<code>int i ;scanf(&quot;%d&quot;,i);</code>。此时 i 是整数，而在32位架构下，整数和地址是一样大的，所以当这么写的时候，把一个整数传进去，或者把一个地址传进去，他们长的是一样的， <code>scanf</code>无法辨别其区别。<br>　　所以此时编译不一定会报错，但是运行一定会出错。运行一定出错是因为<code>scanf</code>把他读入的量写在了内存其他地方，写在了不该写的地方。</p>
+<h1 id="指针应用"><a href="#指针应用" class="headerlink" title="指针应用"></a><FONT COLOR = SpringGreen>指针应用</font></h1><h2 id="返回多个值"><a href="#返回多个值" class="headerlink" title="返回多个值"></a><FONT COLOR = Cyan>返回多个值</font></h2><p>　　<FONT COLOR = LimeGreen>指针应用场景1：函数需要返回多个值！</font>函数是只能返回一个值的，如果需要返回多个值，那就只能通过指针返回。传入的参数的地址，然后利用这个地址把函数里面变量的值带出来。<Font Size = 2>（这句话感觉很绕，但仔细体会体会，能明白的）</font>传入的参数，实际上是需要返回值的地址以及变量。</p>
+<h3 id="Exchange"><a href="#Exchange" class="headerlink" title="Exchange"></a><Font Color = DarkCyan size = 4 Face = 仿宋><strong>Exchange</strong></font></h3><p>　　当时在《函数》那章的时候，曾经有一个问题，就是是否可以编写一个函数，用来交换 a 和 b 的值。当时的答案是不行的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> x , <span class="keyword">int</span> y )</span> </span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">5</span> , b = <span class="number">6</span> ;</span><br><span class="line">	exchange( a , b ) ;</span><br><span class="line"><span class="comment">//	printf(&quot;%d&quot;,exchange(a,b)) ;</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;a=%d b=%d\n&quot;</span>,a,b) ;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> x , <span class="keyword">int</span> y )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t = x ;</span><br><span class="line">	x = y ;</span><br><span class="line">	y = t ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　因为 main 和函数是参数和值的关系，main 提供参数给函数，而函数把值传给 main。所以当需要返回多个值的时候，单纯靠函数是做不到的，但是有了指针就不一样了！因为在函数可以利用指针来访问 main 里面变量的地址，从而达到交换变量值的目的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> *pa , <span class="keyword">int</span> *pb )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a , b ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;a,&amp;b) ;</span><br><span class="line">exchange( &amp;a , &amp;b ) ; <span class="comment">//对于指针变量的函数，调用的时候注意，传的是地址，而不是值！！！</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d %d&quot;</span>,a,b) ;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">( <span class="keyword">int</span> *pa , <span class="keyword">int</span> *pb )</span></span>&#123;<span class="comment">//此时函数拿到 a b 的地址</span></span><br><span class="line">	<span class="keyword">int</span> t = *pb ;<span class="comment">//访问 b 地址上的值，并且把该值传给 t</span></span><br><span class="line">	*pb = *pa ;<span class="comment">//访问 a 地址上的值，并且把该值传给 b</span></span><br><span class="line">	*pa = t ;<span class="comment">//把 t 的值传给 a 地址</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Max-和-Min"><a href="#Max-和-Min" class="headerlink" title="Max 和 Min"></a><Font Color = DarkCyan size = 4 Face = 仿宋><strong>Max 和 Min</strong></font></h3><p>　　编写一个函数，可以判断一个数组里面的最大值和最小值。此时显然函数需要返回两个结果，所以必须要用指针来完成这件事情：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">minmax</span><span class="params">( <span class="keyword">int</span> a[] , <span class="keyword">int</span> *MAX , <span class="keyword">int</span> *MIN , <span class="keyword">int</span> Length)</span></span>;<span class="comment">//这四个参数一个都不能少</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> a[] = &#123; <span class="number">1</span> , <span class="number">2</span> , <span class="number">3</span> , <span class="number">4</span> , <span class="number">5</span> , <span class="number">11</span> , <span class="number">332</span> ,<span class="number">1324</span> , <span class="number">12</span> , <span class="number">34</span> , <span class="number">56</span> , <span class="number">74</span> , <span class="number">12</span> &#125; ;</span><br><span class="line"><span class="keyword">int</span> min = a [<span class="number">0</span>] , max = a [<span class="number">0</span>] ;</span><br><span class="line"><span class="keyword">int</span> length = <span class="keyword">sizeof</span>(a)/<span class="keyword">sizeof</span>(a[<span class="number">0</span>]) ;</span><br><span class="line">minmax( a , &amp;min , &amp;max ,length );<span class="comment">// &amp;min 和 &amp;max 是从 main 传进函数的参数，他们的作用是把函数里面的值带出来！！！！！！！！</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;max = %d , min = %d&quot;</span>,max ,min) ;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">minmax</span><span class="params">( <span class="keyword">int</span> a[] , <span class="keyword">int</span> *MAX , <span class="keyword">int</span> *MIN , <span class="keyword">int</span> Length)</span></span>&#123;<span class="comment">//对于传进来的地址，定义函数的时候得是指针变量</span></span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="keyword">for</span>( i = <span class="number">0</span> ; i &lt; Length  ; i++ )&#123;<span class="comment">//遍历数组</span></span><br><span class="line">		<span class="keyword">if</span>( a[i] &gt; *MAX)&#123;</span><br><span class="line">			*MAX = a[i] ;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>( a[i] &lt; *MIN)&#123;</span><br><span class="line">			*MIN = a[i] ;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Q 1：能不能不要 length ，直接在函数里面使用<code>sizeof(a)/sizeof(a[0])</code>？<br>　　不能，如果调用函数的时候，参数没有<code>sizeof(a)/sizeof(a[0])</code>，那么函数里面是访问不了 a 的。</p>
+<blockquote>
+<p>[Error] ‘a’ undeclared (first use in this function)<br>[Note] each undeclared identifier is reported only once for each function it appears in</p>
+</blockquote>
+<p>Q 2：传值的时候能不能不传数组 a？<br>　　不能，原因同上！只要是函数要用的参数，调用函数的时候都要传值给函数，不然函数无法访问 main 的变量。错误也同上。</p>
+<p>Q 3：调用函数的时候，数组写成了 a[ ] 怎么办？<code>minmax( a[] , &amp;min , &amp;max ,length );</code><br>　　[ ] 实际上是一个运算符，在数组里面索引，所以此时<code>a[]</code>是空的，因为没有值，此时会发生奇奇怪怪的错误：</p>
+<blockquote>
+<p>[Error] expected expression before ‘]’ token</p>
+</blockquote>
+<h2 id="返回结果"><a href="#返回结果" class="headerlink" title="返回结果"></a><FONT COLOR = Cyan>返回结果</font></h2><p>　　<FONT COLOR = LimeGreen>指针应用场景2：函数返回运算的状态，结果通过指针返回</font>。函数在运行的过程中，可能会遇到一些特殊的状态，此时函数无法得到正确的结果。<br>　　此时常用的套路就是让函数返回特殊的，不属于有效范围内的值，来表示出错；在文件操作中，常见的就是让函数返回 -1 或 0 来表示函数出错。<br>　　但是如果函数返回的任何数值都是有效的可能结果时，此时无法通过返回值来判断函数是否运行正确，此时就只能让函数的结果，和需要用的结果分开返回。<FONT COLOR = LimeGreen>一般函数的状态用 return 来返回，而实际的值通过指针来返回。</font></p>
+<h3 id="除法函数"><a href="#除法函数" class="headerlink" title="除法函数"></a><Font Color = DarkCyan size = 4 Face = 仿宋><strong>除法函数</strong></font></h3><p>　　对于<code>divide()</code>函数，如果除法成功，函数返回值为 1 ；如果除法失败，函数返回值为 0 。此时函数需要两个东西，一个是除法是否成功，一个是除法的值；所以函数的状态用函数的 return 来返回，除法的值用指针带出来。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">divide</span><span class="params">( <span class="keyword">int</span> A , <span class="keyword">int</span> B , <span class="keyword">int</span> *Result)</span> </span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> a , b , result ;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;a,&amp;b) ;</span><br><span class="line"><span class="keyword">if</span>( divide( a , b , &amp;result) == <span class="number">1</span> )&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,result) ;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;除数不能为0\n&quot;</span>) ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">divide</span><span class="params">( <span class="keyword">int</span> A , <span class="keyword">int</span> B , <span class="keyword">int</span> *Result)</span></span>&#123;<span class="comment">//需要函数返回值的时候，就不能用void </span></span><br><span class="line">	<span class="keyword">int</span> ret = <span class="number">1</span> ;</span><br><span class="line">	<span class="keyword">if</span>( B == <span class="number">0</span> )&#123;<span class="comment">//如果除数是0，此时指针里是没有任何有用的结果</span></span><br><span class="line">		ret = <span class="number">0</span> ;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		*Result = A / B ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　当运算可能会出错的时候，C只能通过指针来解决。在后续的语言（C++、Java）采用了异常机制来解决这个问题</p>
+<h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a><FONT COLOR = Cyan>常见错误</font></h2><p>　　<FONT COLOR = LimeGreen>定义了指针变量，还没有指向任何变量，就开始使用指针。</font></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p ;</span><br><span class="line"><span class="keyword">int</span> k = <span class="number">12</span> ;</span><br><span class="line">*p = <span class="number">12</span> ;</span><br></pre></td></tr></table></figure>
+<p>　　这种做法编译器不会报错，因为 *p 在编译器里就是可以看做一个整数。</p>
+<p>　　所有的本地变量在没有初始化的时候，是不会有默认的初始值的，这个本地变量所在的地址上有什么，他就是什么。对于指针，如果没有指向任何变量的时候就开始使用它，比如这段代码的<code>*p = 12 </code>；他可能指向一片莫名其妙的地方，然后在那片奇怪的地方写入12。如果那块地方是个不能写的地方，此时会报错；如果那块地方可以写，此时不会报错。但这个指针变量也是没意义的，因为没有储存地址！</p>
+<h1 id="指针与数组"><a href="#指针与数组" class="headerlink" title="指针与数组"></a><FONT COLOR = SpringGreen>指针与数组</font></h1><p>　　如果把一个普通的变量传入函数，函数接收到的是值；如果把一个指针传入函数，函数接受到的也是值，只不过这个值是一个地址；给函数传入数组的话，到底传入函数的数组成了什么？函数接收到的是什么？ 为什么上面的 Max 和Min   程序里面，不能在函数里使用 <code>sizeof(a)</code>？用以下代码来验证：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">minmax</span><span class="params">( <span class="keyword">int</span> a[] , <span class="keyword">int</span> *MAX , <span class="keyword">int</span> *MIN , <span class="keyword">int</span> Length)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> a[] = &#123; <span class="number">1</span> , <span class="number">2</span> , <span class="number">3</span> , <span class="number">4</span> , <span class="number">5</span> , <span class="number">11</span> , <span class="number">332</span> ,<span class="number">1324</span> , <span class="number">12</span> , <span class="number">34</span> &#125; ;</span><br><span class="line"><span class="keyword">int</span> min = a [<span class="number">0</span>] , max = a [<span class="number">0</span>] ;</span><br><span class="line"><span class="keyword">int</span> length = <span class="keyword">sizeof</span>(a)/<span class="keyword">sizeof</span>(a[<span class="number">0</span>]) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;main sizeof(a) = %lu\n&quot;</span>,<span class="keyword">sizeof</span>(a)) ;<span class="comment">//查看在 main 里数组的大小 </span></span><br><span class="line">minmax( a , &amp;min , &amp;max ,length );</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">minmax</span><span class="params">( <span class="keyword">int</span> a[] , <span class="keyword">int</span> *MAX , <span class="keyword">int</span> *MIN , <span class="keyword">int</span> Length)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;minmax sizeof(a) = %lu\n&quot;</span>,<span class="keyword">sizeof</span>(a)) ;<span class="comment">//查看在minmax函数里数组的大小</span></span><br><span class="line">	<span class="keyword">for</span>( i = <span class="number">0</span> ; i &lt; Length  ; i++ )&#123;</span><br><span class="line">		<span class="keyword">if</span>( a[i] &gt; *MAX)&#123;</span><br><span class="line">			*MAX = a[i] ;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>( a[i] &lt; *MIN)&#123;</span><br><span class="line">			*MIN = a[i] ;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　结果分别是40、8。 这个 8 刚好和一个指针的大小是相同的！如果对于比较严格的编译器，会出现一个 warning：</p>
+<blockquote>
+<p>warning: sizeof on array function parameter will return size of ‘int *’ instead of ‘int [ ] ‘.</p>
+</blockquote>
+<p>　　这个警告的意思是，对于函数的数组的 <code>sizeof </code> 返回的是‘int *’的大小，而不是数组的大小。说明在函数里面的数组，实际上是一个指针！用以下代码验证：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">minmax</span><span class="params">( <span class="keyword">int</span> a[] , <span class="keyword">int</span> *MAX , <span class="keyword">int</span> *MIN , <span class="keyword">int</span> Length)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> a[] = &#123; <span class="number">1</span> , <span class="number">2</span> , <span class="number">3</span> , <span class="number">4</span> , <span class="number">5</span> , <span class="number">11</span> , <span class="number">332</span> ,<span class="number">1324</span> , <span class="number">12</span> , <span class="number">34</span> &#125; ;</span><br><span class="line"><span class="keyword">int</span> min = a [<span class="number">0</span>] , max = a [<span class="number">0</span>] ;</span><br><span class="line"><span class="keyword">int</span> length = <span class="keyword">sizeof</span>(a)/<span class="keyword">sizeof</span>(a[<span class="number">0</span>]) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;main a = %p\n&quot;</span>,&amp;a) ;<span class="comment">//查看在 main 里数组 a 的地址 </span></span><br><span class="line">minmax( a , &amp;min , &amp;max ,length );</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">minmax</span><span class="params">( <span class="keyword">int</span> a[] , <span class="keyword">int</span> *MAX , <span class="keyword">int</span> *MIN , <span class="keyword">int</span> Length)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;minmax a = %p\n&quot;</span>,&amp;a) ;<span class="comment">//查看在函数里数组 a 的地址 </span></span><br><span class="line">	<span class="keyword">for</span>( i = <span class="number">0</span> ; i &lt; Length  ; i++ )&#123;</span><br><span class="line">		<span class="keyword">if</span>( a[i] &gt; *MAX)&#123;</span><br><span class="line">			*MAX = a[i] ;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>( a[i] &lt; *MIN)&#123;</span><br><span class="line">			*MIN = a[i] ;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　此时可以发现，在 main 和函数里面，a 的地址是相同的。这说明在函数里面数组a和 main 里面的数组a是一个东西。再用以下代码来验证：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">minmax</span><span class="params">( <span class="keyword">int</span> a[] , <span class="keyword">int</span> *MAX , <span class="keyword">int</span> *MIN , <span class="keyword">int</span> Length)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> a[] = &#123; <span class="number">1</span> , <span class="number">2</span> , <span class="number">3</span> , <span class="number">4</span> , <span class="number">5</span> , <span class="number">11</span> , <span class="number">332</span> ,<span class="number">1324</span> , <span class="number">12</span> , <span class="number">34</span> &#125; ;</span><br><span class="line"><span class="keyword">int</span> min = a [<span class="number">0</span>] , max = a [<span class="number">0</span>] ;</span><br><span class="line"><span class="keyword">int</span> length = <span class="keyword">sizeof</span>(a)/<span class="keyword">sizeof</span>(a[<span class="number">0</span>]) ;</span><br><span class="line">minmax( a , &amp;min , &amp;max ,length );</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,a[<span class="number">0</span>]) ; <span class="comment">//查看a[0]的值</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">minmax</span><span class="params">( <span class="keyword">int</span> a[] , <span class="keyword">int</span> *MAX , <span class="keyword">int</span> *MIN , <span class="keyword">int</span> Length)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	a[<span class="number">0</span>] = <span class="number">1000</span> ; <span class="comment">//尝试在函数里去给数组单元赋值 </span></span><br><span class="line">	<span class="keyword">for</span>( i = <span class="number">0</span> ; i &lt; Length  ; i++ )&#123;</span><br><span class="line">		<span class="keyword">if</span>( a[i] &gt; *MAX)&#123;</span><br><span class="line">			*MAX = a[i] ;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>( a[i] &lt; *MIN)&#123;</span><br><span class="line">			*MIN = a[i] ;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　这里会发现，a[0] 的数值变了。<FONT COLOR = LimeGreen>一般来说，函数里一个变量的值变化了，是不会改变 main 里面这个变量的值。除非是指针。从这里就可以看出来，数组的本质就是指针</font>。<br>　　所以在函数定义的时候，如果是数组变量一定得写<code>a[ ]</code>，方括号里不能加数；函数里不能使用<code>sizeof</code>。因为他的本质就是指针。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">minmax</span><span class="params">( <span class="keyword">int</span> *a , <span class="keyword">int</span> *MAX , <span class="keyword">int</span> *MIN , <span class="keyword">int</span> Length)</span></span>;<span class="comment">//原型里，把数组改成指针</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> a[] = &#123; <span class="number">1</span> , <span class="number">2</span> , <span class="number">3</span> , <span class="number">4</span> , <span class="number">5</span> , <span class="number">11</span> , <span class="number">332</span> ,<span class="number">1324</span> , <span class="number">12</span> , <span class="number">34</span> &#125; ;</span><br><span class="line"><span class="keyword">int</span> min = a [<span class="number">0</span>] , max = a [<span class="number">0</span>] ;</span><br><span class="line"><span class="keyword">int</span> length = <span class="keyword">sizeof</span>(a)/<span class="keyword">sizeof</span>(a[<span class="number">0</span>]) ;</span><br><span class="line">minmax( a , &amp;min , &amp;max ,length );</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,a[<span class="number">0</span>]) ; </span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">minmax</span><span class="params">( <span class="keyword">int</span> *a , <span class="keyword">int</span> *MAX , <span class="keyword">int</span> *MIN , <span class="keyword">int</span> Length)</span></span>&#123;<span class="comment">//定义里，把数组写成指针</span></span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	a[<span class="number">0</span>] = <span class="number">1000</span> ; <span class="comment">//尝试在函数里去给数组单元赋值 </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>( i = <span class="number">0</span> ; i &lt; Length  ; i++ )&#123;</span><br><span class="line">		<span class="keyword">if</span>( a[i] &gt; *MAX)&#123;</span><br><span class="line">			*MAX = a[i] ;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>( a[i] &lt; *MIN)&#123;</span><br><span class="line">			*MIN = a[i] ;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　编译成功！运行正确！</p>
+<p>　　所以我们可以说<FONT COLOR = LimeGreen>函数参数表中的数组实际上就是指针</font>。<code>sizeof(a) == sizeof(*int)</code>；但是可以用数组的运算符<code>[]</code>进行运算。<br>　　<FONT COLOR = LimeGreen>所以以下四种函数原型是等价的：</font></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> *ar , <span class="keyword">int</span> n )</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> * , <span class="keyword">int</span> )</span> </span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> ar[] , <span class="keyword">int</span> n )</span> </span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">( <span class="keyword">int</span> [] ,<span class="keyword">int</span>)</span> </span>;</span><br></pre></td></tr></table></figure>
+<p>　　 <FONT COLOR = LimeGreen>数组变量是特殊的指针</font><br>　　1、数组变量本身就表达地址</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">1</span>] = &#123;<span class="number">1</span>&#125; ;</span><br><span class="line"><span class="keyword">int</span> *p = a ;<span class="comment">//无需使用 &amp; 取地址，就能够把地址交给指针</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,a) ;<span class="comment">//无需使用 &amp; 取地址，就可以吧地址交给 printf 输出</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,p) ;<span class="comment">//两者结果相同</span></span><br></pre></td></tr></table></figure>
+<p>　　但是数组的单元表达的是变量，需要用 &amp; 取地址。</p>
+<p>　　2、数组的地址和第一个元素的地址相同<code>a == &amp;a[0]</code></p>
+<p>　　3、<code>[]</code>使运算符，可以对数组做，也可以对指针做。 p [ 0 ] 相当于 *p</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span> ;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;a ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;*p = %d\n&quot;</span>,*p) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;p[0] = %d\n&quot;</span>,p[<span class="number">0</span>]) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,&amp;a) ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,p) ;</span><br></pre></td></tr></table></figure>
+<p>　　4、* 运算符可以对指针做，也可以对数组做：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">2</span>] = &#123;<span class="number">1</span> , <span class="number">2</span> &#125; ;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;*a = %d\n&quot;</span>,*a) ;</span><br></pre></td></tr></table></figure>
+<p>　　此时<code>*a</code>的值是<code>a[0]</code>的值。和指针一样，可以对这个值进行读写操作。</p>
+<p>　　5、数组变量是 const 的指针，所以不能被赋值。<br>　　前面学过，像这种数组给数组赋值，是不被允许的<code>int b[] = a []</code>。数组变量间是不允许相互赋值的。因为<code>int b[] </code>相当于是<code>int * const b ;</code>相当于这个 b 是一个常数，是不可以被改变的。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/2021/03/09/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2009%20Pointers%20I/">Chapter 09 Pointers I</a></p>	
+		<p><span>文章作者:</span>徐思远</a></p>
+
+        <p><span>发布时间:</span>2021年03月09日 - 21时59分</p>
+        <p><span>最后更新:</span>2021年04月06日 - 21时47分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2021/03/09/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2009%20Pointers%20I/" title="Chapter 09 Pointers I">https://github.com/XuSiyuan-cn/2021/03/09/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2009%20Pointers%20I/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://github.com/XuSiyuan-cn/2021/03/09/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2009%20Pointers%20I/　　作者: " title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a  href="/2021/03/10/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2009%20Pointers%20II/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Chapter 09 Pointers II
+        
+      </div>
+    </a>
+  
+  
+    <a  href="/2021/03/08/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2008%20Array/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Chapter 08 Array</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+//		<p><span>文章作者:</span><a  href="/" title="访问  的个人博客"></a></p>
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%96%E5%9C%B0%E5%9D%80%E8%BF%90%E7%AE%97"><span class="toc-number">1.</span> <span class="toc-text">取地址运算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6-amp"><span class="toc-number">1.1.</span> <span class="toc-text">运算符&amp;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E8%83%BD%E5%8F%96%E7%9A%84%E5%9C%B0%E5%9D%80"><span class="toc-number">1.2.</span> <span class="toc-text">不能取的地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9C%B0%E5%9D%80"><span class="toc-number">1.3.</span> <span class="toc-text">常见的地址</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E9%92%88"><span class="toc-number">2.</span> <span class="toc-text">指针</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">指针变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%B8%8E%E6%8C%87%E9%92%88"><span class="toc-number">2.2.</span> <span class="toc-text">函数与指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E5%9C%B0%E5%9D%80"><span class="toc-number">2.3.</span> <span class="toc-text">访问地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A6%E5%80%BC"><span class="toc-number">2.4.</span> <span class="toc-text">左值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#amp-%E5%92%8C"><span class="toc-number">2.5.</span> <span class="toc-text">&amp; 和 *</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scanf%E7%9A%84%E2%80%9D%E4%B8%8D%E5%90%88%E7%90%86%E2%80%9D"><span class="toc-number">2.6.</span> <span class="toc-text">scanf的”不合理”</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">指针应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%A4%9A%E4%B8%AA%E5%80%BC"><span class="toc-number">3.1.</span> <span class="toc-text">返回多个值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exchange"><span class="toc-number">3.1.1.</span> <span class="toc-text">Exchange</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Max-%E5%92%8C-Min"><span class="toc-number">3.1.2.</span> <span class="toc-text">Max 和 Min</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="toc-number">3.2.</span> <span class="toc-text">返回结果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%A4%E6%B3%95%E5%87%BD%E6%95%B0"><span class="toc-number">3.2.1.</span> <span class="toc-text">除法函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF"><span class="toc-number">3.3.</span> <span class="toc-text">常见错误</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84"><span class="toc-number">4.</span> <span class="toc-text">指针与数组</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section class="changyan" id="comments">
+  <!--<div id="uyan_frame"></div>-->
+  <div id="SOHUCS"></div>
+  <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
+  <script type="text/javascript">
+    window.changyan.api.config({
+      appid: 'xxxx',
+      conf: 'xxxxxxxxx'
+    });
+  </script>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/2021/03/10/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2009%20Pointers%20II/" title="上一篇: Chapter 09 Pointers II">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/2021/03/08/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2008%20Array/" title="下一篇: Chapter 08 Array">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/03/24/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/10%20%E4%B8%89%E6%9C%88%E7%9A%84%E7%BB%93%E6%9D%9F/">3月的结束</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/16/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2016%20Interactive%20Graphic%20Design/">Chapter 16 Interactive Graphic Design</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/15/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2015%20ACLLib/">Chapter 15 ACLLib</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/14/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2014%20Linked%20List/">Chapter 14 Linked List</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/13/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2013%20File/">Chapter 13 File</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/12/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2012%20Program%20Structure/">Chapter 12 Program Structure</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/11/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2011%20Structure%20Type/">Chapter 11 Structure Type</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/10/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2009%20Pointers%20II/">Chapter 09 Pointers II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/09/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2009%20Pointers%20I/">Chapter 09 Pointers I</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/08/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2008%20Array/">Chapter 08 Array</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/07/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2007%20Function/">chapter 07 Function</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/06/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2006%20Data%20Type/">Chapter 06 Data Type</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/05/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2005%20Loop%20II/">Chapter 05 Loop I</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/04/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/03%E6%B1%89%E9%AB%98%E7%A5%96/%E6%B1%89%E9%AB%98%E7%A5%9604%E7%8E%87%E5%85%88%E5%85%A5%E5%85%B3/">汉高祖04率先入关</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/04/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2004%20Loop%20I/">Chapter 04 Loop I</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/03/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/03%E6%B1%89%E9%AB%98%E7%A5%96/%E6%B1%89%E9%AB%98%E7%A5%9603%E8%A5%BF%E5%85%A5%E7%A7%A6%E5%85%B3/">汉高祖03西入秦关</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/03/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2003%20Judgment/">Chapter 03 Judgment</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/02/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2002%20Calculation/">Chapter 02 Calculation</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/01/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2001%20Introduction/">Chapter 01 Introduction</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/27/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/03%E6%B1%89%E9%AB%98%E7%A5%96/%E6%B1%89%E9%AB%98%E7%A5%9602%E6%97%B6%E4%BB%A3%E7%8E%89%E6%88%90/">汉高祖02时代玉成</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/26/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/03%E6%B1%89%E9%AB%98%E7%A5%96/%E6%B1%89%E9%AB%98%E7%A5%9601%E4%BC%A0%E5%A5%87%E7%9A%87%E5%B8%9D/">汉高祖01传奇皇帝</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/25/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD09%E5%9B%9B%E9%9D%A2%E6%A5%9A%E6%AD%8C/">项羽09四面楚歌</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/24/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD08%E9%9C%B8%E7%8E%8B%E5%88%AB%E5%A7%AC/">项羽08霸王别姬</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/23/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD07%E6%80%A7%E6%A0%BC%E4%BD%BF%E7%84%B6/">项羽07性格使然</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/%E6%9D%82/%E5%8F%A4%E4%BB%A3%E6%88%98%E4%BA%89%E4%B8%8B%E7%99%BE%E5%A7%93%E7%9A%84%E7%94%9F%E6%B4%BB/">古代战争下百姓的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD06%E8%8D%A5%E9%98%B3%E4%BC%9A%E6%88%98/">项羽06荥阳会战</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/21/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD05%E7%94%9F%E6%AD%BB%E5%86%B3%E6%88%98/">项羽05生死决战</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/20/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD04%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/">项羽04西楚霸王</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/19/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD03%E9%B8%BF%E9%97%A8%E5%AE%B4%E4%BC%9A/">项羽03鸿门宴会</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/18/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD02%E9%A1%B9%E7%BE%BD%E5%85%A5%E5%85%B33%EF%BC%88%E4%B8%8B%EF%BC%89/">项羽02项羽入关（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/17/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD02%E9%A1%B9%E7%BE%BD%E5%85%A5%E5%85%B32%EF%BC%88%E4%B8%AD%EF%BC%89/">项羽02项羽入关（中）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/17/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD02%E9%A1%B9%E7%BE%BD%E5%85%A5%E5%85%B31%EF%BC%88%E4%B8%8A%EF%BC%89/">项羽02项羽入关（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/16/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/02%E8%A5%BF%E6%A5%9A%E9%9C%B8%E7%8E%8B/%E9%A1%B9%E7%BE%BD01%E9%9C%B8%E7%8E%8B%E5%87%BA%E4%B8%96/">项羽01霸王出世</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/15/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8747%E9%9A%BE%E8%AF%B4%E5%86%8D%E8%A7%81/">秦始皇47难说再见</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/14/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8746%E5%8D%83%E5%8F%A4%E4%B8%80%E5%B8%9D/">秦始皇46千古一帝</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/13/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8745%E5%94%90%E4%BA%BA%E8%AE%BA%E7%A7%A6/">秦始皇45唐人论秦</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/12/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8744%E6%B1%89%E5%84%92%E8%AF%84%E7%A7%A6/">秦始皇44汉儒评秦</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/11/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8743%E7%9B%97%E9%99%B5%E6%AF%81%E9%99%B5/">秦始皇43盗陵毁陵</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/11/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8742%E7%9A%87%E9%99%B5%E4%B9%8B%E8%B0%9C/">秦始皇42皇陵之谜</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/10/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8741%E5%AD%90%E5%A9%B4%E4%BA%A1%E5%9B%BD/">秦始皇41子婴亡国</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/09/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8740%E8%B5%B5%E9%AB%98%E4%B9%8B%E6%AD%BB/">秦始皇40赵高之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/08/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8739%E8%83%A1%E4%BA%A5%E4%B9%8B%E6%AD%BB/">秦始皇39胡亥之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/07/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8738%E6%9D%8E%E6%96%AF%E4%B9%8B%E6%AD%BB/">秦始皇38李斯之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/06/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8737%E5%B7%A9%E5%9B%BA%E5%B8%9D%E4%BD%8D/">秦始皇37巩固帝位</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/05/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8736%E4%BA%8C%E4%B8%96%E8%AF%88%E7%AB%8B/">秦始皇36二世诈立</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/04/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8735%E6%9D%8E%E6%96%AF%E5%8F%98%E8%8A%82/">秦始皇35李斯变节</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/03/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8734%E6%B2%99%E4%B8%98%E6%94%BF%E5%8F%98/">秦始皇34沙丘政变</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/02/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8733%E7%A7%98%E4%B8%8D%E5%8F%91%E4%B8%A7/">秦始皇33秘不发丧</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/01/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8732%E5%A7%8B%E7%9A%87%E4%B9%8B%E6%AD%BB/">秦始皇32始皇之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/31/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8731%E7%84%9A%E4%B9%A6%E5%9D%91%E5%84%92/">秦始皇31焚书坑儒</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/30/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8730%E7%94%9F%E6%AD%BB%E8%8C%AB%E8%8C%AB/">秦始皇30生死茫茫</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/29/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8729%E4%B8%87%E9%87%8C%E9%95%BF%E5%9F%8E/">秦始皇29万里长城</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/28/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8728%E7%BB%9F%E4%B8%80%E5%88%B6%E5%BA%A6/">秦始皇28统一制度</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/27/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8727%E9%9B%86%E6%9D%83%E7%9A%87%E5%B8%9D/">秦始皇27集权皇帝</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/26/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8726%E5%85%AD%E4%B8%96%E4%BD%99%E7%83%88/">秦始皇26六世余烈</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/25/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8725%E8%82%A1%E8%82%B1%E4%B9%8B%E8%87%A3/">秦始皇25股肱之臣</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/24/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8724%E4%B8%8D%E6%88%98%E8%80%8C%E9%99%8D/">秦始皇24不战而降</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/23/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8723%E7%A7%A6%E7%81%AD%E6%A5%9A%E5%9B%BD/">秦始皇23秦灭楚国</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/09%20%E9%99%8C%E4%B8%8A%E8%8A%B1%E5%BC%80/">陌上花开</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8722%E7%A7%A6%E7%81%AD%E7%87%95%E5%9B%BD%EF%BC%88%E4%B8%8B%EF%BC%89/">秦始皇22秦灭燕国（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8722%E7%A7%A6%E7%81%AD%E7%87%95%E5%9B%BD%EF%BC%88%E4%B8%8A%EF%BC%89/">秦始皇22秦灭燕国（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/%E6%9D%82/%E6%95%95%E6%B2%B3%E8%A5%BF%E8%8A%82%E5%BA%A6%E5%85%B5%E9%83%A8%E5%B0%9A%E4%B9%A6%E5%BC%A0%E5%85%AC%E5%BE%B7%E6%94%BF%E4%B9%8B%E7%A2%91/">敕河西节度兵部尚书张公德政之碑</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/21/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8721%E6%B0%B4%E6%B7%B9%E5%A4%A7%E6%A2%81%EF%BC%88%E4%B8%8A%EF%BC%89/">秦始皇21水淹大梁（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/20/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8721%E6%B0%B4%E6%B7%B9%E5%A4%A7%E6%A2%81%EF%BC%88%E4%B8%8B%EF%BC%89/">秦始皇21水淹大梁（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/20/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8720%E8%B5%B5%E5%9B%BD%E4%B9%8B%E4%BA%A1/">秦始皇20赵国之亡</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8719%E9%82%AF%E9%83%B8%E4%B9%8B%E6%88%98/">秦始皇19邯郸之战</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/O.Henry's%20World%20@%20NO.10/">the Truth of the World @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/03%20Bernard%20Woolley%20@%20DAA/">a Promising Civil Servant, Bernard @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/01%20Jim%20Hacker%20@%20DAA/">a Die-hard Fan of Winston Churchill, James Hacker @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/O.Henry's%20World%20@%20DAA/">O.Henry's World @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/05%20Sir%20Humphrey%20@%20NO.10/">Big Big Speeches of Sir Humphery @ NO.10</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/02%20Sir%20Humphery%20@%20DAA/">Big Speeches of Sir Humphery @ DAA</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/04%20Jim%20Hacker%20@%20NO.10/">Great Design of James Hacker @ NO.10</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/01%20%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/yes%20minister%20&%20yes%20prime%20minister/06%20Bernard%20Woolley%20@%20NO.10/">Lovely Bernard @ NO.10</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/18/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8718%E9%95%BF%E5%B9%B3%E4%B9%8B%E6%88%98/">秦始皇18长平之战</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/17/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8717%E7%A7%A6%E8%B5%B5%E4%B9%8B%E4%BA%89/">秦始皇17秦赵之争</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/16/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8716%E8%B5%B5%E6%AD%A6%E7%81%B5%E7%8E%8B/">秦始皇16赵武灵王</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/15/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8715%E9%9F%A9%E5%9B%BD%E4%B9%8B%E4%BA%A1%EF%BC%88%E4%B8%8B%EF%BC%89/">秦始皇15韩国之亡（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/15/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8715%E9%9F%A9%E5%9B%BD%E4%B9%8B%E4%BA%A1%EF%BC%88%E4%B8%8A%EF%BC%89/">秦始皇15韩国之亡（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/15/02%20%E6%95%B0%E5%AD%A6/00%20ReadMe/">ReadMe</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/14/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8714%E4%B8%89%E5%AE%B6%E5%88%86%E6%99%8B/">秦始皇14三家分晋</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/13/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8713%E9%9F%A9%E6%B0%8F%E5%88%9D%E5%85%B4/">秦始皇13韩氏初兴</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/12/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8712%E9%80%9A%E5%A4%A9%E5%A4%A7%E8%AE%A1/">秦始皇12通天大计</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/11/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8711%E6%9D%8E%E6%96%AF%E4%B8%BA%E6%94%BF/">秦始皇11李斯为政</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/10/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8710%E4%B8%8D%E9%9F%A6%E4%B9%8B%E6%AD%BB/">秦始皇10不韦之死</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/10/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/08%202021%E7%9A%84%E5%BC%80%E5%B1%80/">2021的开局</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/09/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8709%E8%B5%B5%E5%A7%AC%E4%B9%8B%E4%B9%B1/">秦始皇09赵姬之乱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/08/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8708%E7%94%9F%E7%88%B6%E4%B9%8B%E8%B0%9C/">秦始皇08生父之谜</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/07/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/07%20%E6%B8%B8%E8%A4%92%E7%A6%85%E5%B1%B1%E8%AE%B0%E2%80%94%E2%80%94%E7%8E%8B%E5%AE%89%E7%9F%B3/">褒禅山记 ——王安石</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/07/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8707%E5%BC%82%E4%BA%BA%E5%A5%87%E7%BC%98/">秦始皇07异人奇缘</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/06/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/06%20%E5%8F%B8%E6%96%87%E9%83%8E%E2%80%94%E2%80%94%E8%92%B2%E6%9D%BE%E9%BE%84/">司文郎——蒲松龄</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/06/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8706%E6%98%AD%E7%8E%8B%E7%A7%B0%E9%9C%B8/">秦始皇06昭王称霸</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/05/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8705%E5%90%88%E7%BA%B5%E8%BF%9E%E6%A8%AA%EF%BC%88%E4%B8%8B%EF%BC%89/">秦始皇05合纵连横（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/05/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8705%E5%90%88%E7%BA%B5%E8%BF%9E%E6%A8%AA%EF%BC%88%E4%B8%8A%EF%BC%89/">秦始皇05合纵连横（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/05/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/05%20%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E4%B8%80%E4%B8%AA%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB%E2%80%94%E2%80%94%E7%99%BD%E5%B2%A9%E6%9D%BE/">我们需要一个什么样的大学生活——白岩松</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/04/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8704%E5%AD%9D%E5%85%AC%E5%8F%98%E6%B3%95/">秦始皇04孝公变法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/04/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/04%20%E8%AF%BB%E4%B9%A6%E7%9A%84%E5%88%9D%E5%BF%83%E2%80%94%E2%80%94%E7%8E%8B%E7%AB%8B%E7%BE%A4/">读书的初心——王立群</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/03/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8703%E7%A9%86%E5%85%AC%E4%B8%9C%E6%89%A9/">秦始皇03穆公东扩</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/03/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/03%20%E8%AF%BB%E5%8F%B2%E7%9A%84%E5%A2%83%E7%95%8C%E2%80%94%E2%80%94%E7%8E%8B%E7%AB%8B%E7%BE%A4/">读史的境界——王立群</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/02/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/02%20%E9%AB%80%E8%82%89%E5%A4%8D%E7%94%9F/">髀肉复生</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/02/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8702%E8%A5%84%E5%85%AC%E7%AB%8B%E5%9B%BD/">秦始皇02襄公立国</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/01/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/01%E7%A7%A6%E5%A7%8B%E7%9A%87/%E7%A7%A6%E5%A7%8B%E7%9A%8701%E8%8D%86%E8%BD%B2%E5%88%BA%E7%A7%A6/">秦始皇01荆轲刺秦</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/01/06%20%E7%9B%AE%E5%BD%95/%E7%9B%AE%E5%BD%95/">目录</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/01/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%BE%E7%A8%8B/01%20C/Chapter%2000%20Programming%20in%20C%20of%20Mr.WengKai%20of%20ZjU/">Chapter 00 Programming in C of Mr.WengKai of ZjU</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/01/05%20%E5%85%8B%E7%96%BE%E4%B9%8B%E8%B7%AF/01%20Hello-World/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/31/04%20%E5%8E%86%E5%8F%B2%E7%9A%84%E5%A4%A9%E7%A9%BA/%E5%8F%B2%E5%AE%B6%E4%B9%8B%E7%BB%9D%E5%94%B1%20%E5%8F%B8%E9%A9%AC%E8%BF%81%E4%B8%8E%E6%8A%A5%E4%BB%BB%E5%AE%89%E4%B9%A6/">史家之绝唱——司马迁与报任安书</a></li></ul>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 XuSiyuan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo &nbsp;&nbsp;</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 1;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
